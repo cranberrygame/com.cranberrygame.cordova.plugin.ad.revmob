@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.cranberrygame.phonegap.plugin.ad.revmob"
+    version="1.0.1">
+	
+    <name>RevMob</name>
+    <description>RevMob</description>
+    <author>Sang Ki Kwon (Cranberrygame)</author>	
+    <license>MIT</license>
+    <keywords>phonegap, ad, revmob</keywords>
+    <repo>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.ad.revmob</repo>
+    <issue>https://github.com/floatinghotpot/com.cranberrygame.phonegap.plugin.ad.revmob/issues</issue>	
+
+	<engines>
+	    <engine name="cordova" version=">=3.0.0" />
+	</engines>
+ 	
+    <js-module src="www/revmob.js">
+        <clobbers target="window.revmob" />
+    </js-module>
+	
+    <!-- android -->
+    <platform name="android">
+<!--
+		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="5d784fb083027fd2c1ef1545d8a2b0d595e4ec69" />
+-->		
+		<dependency id="com.google.playservices" version="17.0.0" />
+		
+	    <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="RevMobPlugin" >
+                <param name="android-package" value="com.revmob.cordova.RevMobPlugin"/>
+            </feature>
+        </config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<activity android:name="com.revmob.ads.fullscreen.FullscreenActivity"
+					  android:theme="@android:style/Theme.Translucent"
+					  android:configChanges="keyboardHidden|orientation">
+			</activity>
+        </config-file>
+		
+        <config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.INTERNET"/>
+        </config-file>	
+
+
+
+		
+		
+	    <source-file src="src/android/revmob-android-wrapper.jar" target-dir="libs" />
+    </platform>
+
+	<!-- ios -->
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="RevMobPlugin">
+				<param name="ios-package" value="RevMobPlugin" />
+			</feature>
+		</config-file>
+				
+		<header-file src="src/ios/RevMobPlugin.h" />
+		<source-file src="src/ios/librevmob-ios-wrapper.a" framework="true" />	
+	</platform>
+	
+</plugin>

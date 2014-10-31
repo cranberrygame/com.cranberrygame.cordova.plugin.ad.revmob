@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>The RevMob Sample App</title>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript">
+			var app = {
+				// Application Constructor
+				initialize: function() {
+					this.bindEvents();
+				},
+				// Bind Event Listeners
+				//
+				// Bind any events that are required on startup. Common events are:
+				// 'load', 'deviceready', 'offline', and 'online'.
+				bindEvents: function() {
+					document.addEventListener('deviceready', this.onDeviceReady, false);
+				},
+				// deviceready Event Handler
+				//
+				// The scope of 'this' is the event. In order to call the 'receivedEvent'
+				// function, we must explicity call 'app.receivedEvent(...);'
+				onDeviceReady: function() {
+					app.receivedEvent('deviceready');
+				},
+				// Update DOM on a Received Event
+				receivedEvent: function(id) {
+					var parentElement = document.getElementById(id);
+					var listeningElement = parentElement.querySelector('.listening');
+					var receivedElement = parentElement.querySelector('.received');
+
+					listeningElement.setAttribute('style', 'display:none;');
+					receivedElement.setAttribute('style', 'display:block;');
+
+					console.log('Received Event: ' + id);
+				}
+			};		
+            app.initialize();
+		</script>
+        <script type="text/javascript">
+            var revmob = null;
+            function onDeviceReady() {
+/*			
+                // revmob = new RevMob("5106be9d0639b41100000052"); //iOS
+                revmob = new RevMob("5106bea78e5bd71500000098"); //Android
+*/	
+				revmob.setUp("5106bea78e5bd71500000098");
+            }
+
+            function onBodyLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+
+            var onSuccess = function (event) {
+                var message = "";
+                if (event.RevMobAdsEvent == "SESSION_STARTED") {
+                    message = "Session started!";
+                }
+                else if (event.RevMobAdsEvent == "AD_RECEIVED") {
+                    message = "Ad received!";
+                }
+                else if (event.RevMobAdsEvent == "AD_DISMISS") {
+                    message = "Ad dismiss!";
+                }
+                else if (event.RevMobAdsEvent == "AD_CLICKED") {
+                    message = "Ad clicked!";
+                }
+                else if (event.RevMobAdsEvent == "AD_DISPLAYED") {
+                    message = "Ad displayed!";
+                }
+                else if (event.RevMobAdsEvent == "EULA_DISPLAYED") {
+                    message = "Eula displayed!";
+                }
+                else if (event.RevMobAdsEvent == "EULA_ACCEPTED") {
+                    message = "Eula accepted!";
+                }
+                else if (event.RevMobAdsEvent == "EULA REJECTED") {
+                    message = "Eula rejected!";
+                }
+                else {
+                    message = event.RevMobAdsEvent;
+                }
+
+                var element = document.getElementById('eventLog');
+                element.innerHTML = 'EVENT: ' + message;
+            }
+
+            var onError = function (event) {
+                var message = "";
+                if (event.RevMobAdsEvent == "AD_NOT_RECEIVED") {
+                    message = "Ad not received!";
+                }
+                else if (event.RevMobAdsEvent == "SESSION_NOT_STARTED") {
+                    message = "Session not started!";
+                }
+                else {
+                    message = event.RevMobAdsEvent;
+                }
+
+                var element = document.getElementById('eventLog');
+                element.innerHTML = 'ERROR: ' + message;
+            }
+            </script>
+    </head>
+
+    <body onload="onBodyLoad()">
+        <div class="app">
+            <h1>The RevMob Sample App</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+            <div class="revmob-panel">
+                <button onclick="revmob.startSession(onSuccess, onError);">Start Session</button><br />
+                <button onclick="revmob.setTestingMode(revmob.TEST_WITH_ADS);">Testing mode with ads</button><br />
+                <button onclick="revmob.setTestingMode(revmob.TEST_WITHOUT_ADS);">Testing mode without ads</button><br />
+                <button onclick="revmob.setTestingMode(revmob.TEST_DISABLED);">Disable Testing mode</button><br />
+                <button onclick="revmob.showFullscreen(onSuccess, onError);">Show Fullscreen</button><br />
+                <button onclick="revmob.showPopup(onSuccess, onError);">Show Popup</button><br />
+                <button onclick="revmob.showBanner(onSuccess, onError);">Show Banner</button><br />
+                <button onclick="revmob.hideBanner(onSuccess, onError);">Hide Banner</button><br />
+                <button onclick="revmob.openAdLink(onSuccess, onError);">Open Ad Link</button><br />
+                <button onclick="revmob.printEnvironmentInformation();">Print Environment Information</button><br />
+                <button onclick="revmob.setTimeoutInSeconds(5);">Set timeout (5s)</button><br />
+            </div>
+            <p id="eventLog">Waiting for events</p>
+        </div>
+    </body>
+</html>
