@@ -32,7 +32,7 @@ Repo URL: https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.ad.
 
 ```
 # Examples #
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.ad.revmob/blob/master/example/basic/index.html">example/index.html</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.ad.revmob/blob/master/example/index.html">example/index.html</a>
 # Test #
 
 # Useful links #

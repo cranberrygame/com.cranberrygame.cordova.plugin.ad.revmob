@@ -43,10 +43,6 @@
         <config-file target="AndroidManifest.xml" parent="/*">
 			<uses-permission android:name="android.permission.INTERNET"/>
         </config-file>	
-
-
-
-		
 		
 	    <source-file src="src/android/revmob-android-wrapper.jar" target-dir="libs" />
     </platform>
@@ -60,7 +56,12 @@
 		</config-file>
 				
 		<header-file src="src/ios/RevMobPlugin.h" />
-		<source-file src="src/ios/librevmob-ios-wrapper.a" framework="true" />	
+		<source-file src="src/ios/librevmob-ios-wrapper.a" framework="true" />
+
+ 	    <framework src="StoreKit.framework" />
+        <framework src="SystemConfiguration.framework" />
+ 	    <framework src="MediaPlayer.framework" />
+        <framework src="AdSupport.framework" />
 	</platform>
 	
 </plugin>
