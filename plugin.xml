@@ -4,14 +4,13 @@
     id="com.cranberrygame.phonegap.plugin.ad.revmob"
     version="1.0.1">
 	
-    <name>RevMob</name>
-    <description>RevMob</description>
+    <name>Phonegap RevMob plugin</name>
+    <description>Phonegap RevMob plugin</description>
     <author>Sang Ki Kwon (Cranberrygame)</author>	
     <license>MIT</license>
-    <keywords>phonegap, ad, revmob</keywords>
+    <keywords>phonegap, plugin, ad, revmob</keywords>
     <repo>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.ad.revmob</repo>
-    <issue>https://github.com/floatinghotpot/com.cranberrygame.phonegap.plugin.ad.revmob/issues</issue>	
-
+    <issue>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.ad.revmob/issues</issue>	
 	<engines>
 	    <engine name="cordova" version=">=3.0.0" />
 	</engines>
@@ -23,9 +22,9 @@
     <!-- android -->
     <platform name="android">
 <!--
-		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="5d784fb083027fd2c1ef1545d8a2b0d595e4ec69" />
+		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="00f511a8ce332d4586f067240460bfe978ace2ae" />
 -->		
-		<dependency id="com.google.playservices" version="17.0.0" />
+		<dependency id="com.google.playservices@19.0.0" />
 		
 	    <config-file target="res/xml/config.xml" parent="/*">
             <feature name="RevMobPlugin" >
@@ -62,6 +61,5 @@
         <framework src="SystemConfiguration.framework" />
  	    <framework src="MediaPlayer.framework" />
         <framework src="AdSupport.framework" />
-	</platform>
-	
+	</platform>	
 </plugin>
