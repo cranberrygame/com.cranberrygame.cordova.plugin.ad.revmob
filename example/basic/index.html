@@ -1,0 +1,98 @@
+<html>
+<head>
+	<script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+
+<script>
+
+var mediaId = "REPLACE_THIS_WITH_YOUR_MEDIA_ID";
+var isOverlap = true; //true: overlap, false: split
+
+/*
+var mediaId;
+var isOverlap = true; //true: overlap, false: split
+//android
+if (navigator.userAgent.match(/Android/i)) {
+	mediaId = "REPLACE_THIS_WITH_YOUR_ANDROID_MEDIA_ID";
+}
+//ios
+else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+	mediaId = "REPLACE_THIS_WITH_YOUR_IOS_MEDIA_ID";
+}
+*/
+
+document.addEventListener("deviceready", function(){
+	window.revmob.setUp(mediaId, isOverlap);
+
+	//banner ad callback
+	window.revmob.onBannerAdPreloaded = function() {
+		alert('onBannerAdPreloaded');
+	};
+	window.revmob.onBannerAdLoaded = function() {
+		alert('onBannerAdLoaded');
+	};
+	//full screen ad callback
+	window.revmob.onFullScreenAdPreloaded = function() {
+		alert('onFullScreenAdPreloaded');
+	};
+	window.revmob.onFullScreenAdLoaded = function() {
+		alert('onFullScreenAdLoaded');
+	};
+	window.revmob.onFullScreenAdShown = function() {
+		alert('onFullScreenAdShown');
+	};
+	window.revmob.onFullScreenAdHidden = function() {
+		alert('onFullScreenAdHidden');
+	};
+	//popup ad callback
+	window.revmob.onPopupAdPreloaded = function() {
+		alert('onPopupAdPreloaded');
+	};
+	window.revmob.onPopupAdLoaded = function() {
+		alert('onPopupAdLoaded');
+	};
+	window.revmob.onPopupAdShown = function() {
+		alert('onPopupAdShown');
+	};
+	window.revmob.onPopupAdHidden = function() {
+		alert('onPopupAdHidden');
+	};
+	//ad link ad callback
+	window.revmob.onAdLinkAdPreloaded = function() {
+		alert('onAdLinkAdPreloaded');
+	};
+	window.revmob.onAdLinkAdLoaded = function() {
+		alert('onAdLinkAdLoaded');
+	};
+	window.revmob.onAdLinkAdShown = function() {
+		alert('onAdLinkAdShown');
+	};
+	window.revmob.onAdLinkAdHidden = function() {
+		alert('onAdLinkAdHidden');
+	};	
+}, false);
+	
+/*
+position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
+size: 	'BANNER' (320x50, Phones and Tablets)
+		'LARGE_BANNER' (320x100, Phones and Tablets)
+		'MEDIUM_RECTANGLE' (300x250, Phones and Tablets)
+		'FULL_BANNER' (468x60, Tablets)
+		'LEADERBOARD' (728x90, Tablets)
+		'SKYSCRAPER' (120x600, Tablets, ipad only)
+		'SMART_BANNER' (Auto size, Phones and Tablets, recommended)
+*/
+</script>
+
+<p><button onclick="window.admob.preloadBannerAd();">preloadBannerAd</button></p>
+<p><button onclick="window.admob.showBannerAd('top-center', 'SMART_BANNER');">showBannerAd top-center</button></p>
+<p><button onclick="window.admob.showBannerAd('bottom-center', 'SMART_BANNER');">showBannerAd bottom-center</button></p>
+<p><button onclick="window.admob.reloadBannerAd();">reloadBannerAd</button></p>
+<p><button onclick="window.admob.hideBannerAd();">hideBannerAd</button></p>
+<br>
+<p><button onclick="window.admob.preloadFullScreenAd();">preloadFullScreenAd</button></p>
+<p><button onclick="window.admob.showFullScreenAd();">showFullScreenAd</button></p>
+
+</body>
+</html>

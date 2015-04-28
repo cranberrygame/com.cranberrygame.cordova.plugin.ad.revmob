@@ -1,31 +1,56 @@
+//Copyright (c) 2014 Sang Ki Kwon (Cranberrygame)
+//Email: cranberrygame@yahoo.com
+//Homepage: http://www.github.com/cranberrygame
+//License: MIT (http://opensource.org/licenses/MIT)
 #import <Foundation/Foundation.h>
-#import "RevMobAds.h"
-#import "CDVPlugin.h"
-#import "RevMobAdsDelegate.h"
+#import <Cordova/CDV.h>
+//
+#import <RevMobAds/RevMobAds.h>
+#import <RevMobAds/RevMobAdsDelegate.h>
 
+@protocol Plugin <NSObject>
+- (UIWebView*) getWebView;
+- (UIViewController*) getViewController;
+- (id<CDVCommandDelegate>) getCommandDelegate;
+- (NSString*) getCallbackIdKeepCallback;
+@end
 
-@interface RevMobPlugin : CDVPlugin <RevMobAdsDelegate>
+@protocol PluginDelegate <NSObject>
+- (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap;
+- (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey;
+- (void) _preloadBannerAd;
+- (void) _showBannerAd:(NSString *)position aSize:(NSString *)size;
+- (void) _reloadBannerAd;
+- (void) _hideBannerAd;
+- (void) _preloadFullScreenAd;
+- (void) _showFullScreenAd;
+- (void) _preloadPopupAd;
+- (void) _showPopupAd;
+- (void) _preloadAdLinkAd;
+- (void) _showAdLinkAd;
 
-@property (nonatomic, strong)RevMobBanner *bannerWindow;
+@end
 
-- (void) startSession:(CDVInvokedUrlCommand*)command;
+@interface RevMobPlugin : CDVPlugin <Plugin, PluginDelegate>
 
-- (void) setTestingMode:(CDVInvokedUrlCommand*)command;
-
-- (void) openAdLink:(CDVInvokedUrlCommand*)command;
-
-- (void) showPopup:(CDVInvokedUrlCommand*)command;
-
-- (void) showBanner:(CDVInvokedUrlCommand*)command;
-
-- (void) hideBanner:(CDVInvokedUrlCommand*)command;
-
-- (void) showFullscreen:(CDVInvokedUrlCommand*)command;
-
-- (void) printEnvironmentInformation:(CDVInvokedUrlCommand*)command;
-
-- (void) setTimeoutInSeconds:(CDVInvokedUrlCommand*)command;
-
-@property (nonatomic, strong)CDVInvokedUrlCommand *sessionCommand;
+@property NSString *callbackIdKeepCallback;
+//
+@property id<PluginDelegate> pluginDelegate;
+//
+@property NSString *email;
+@property NSString *licenseKey_;
+	
+- (void) setUp: (CDVInvokedUrlCommand*)command;
+- (void) setLicenseKey: (CDVInvokedUrlCommand*)command;
+- (void) preloadBannerAd: (CDVInvokedUrlCommand*)command;
+- (void) showBannerAd: (CDVInvokedUrlCommand*)command;
+- (void) reloadBannerAd: (CDVInvokedUrlCommand*)command;
+- (void) hideBannerAd: (CDVInvokedUrlCommand*)command;
+- (void) preloadFullScreenAd: (CDVInvokedUrlCommand*)command;
+- (void) showFullScreenAd: (CDVInvokedUrlCommand*)command;
+- (void) preloadPopupAd: (CDVInvokedUrlCommand*)command;
+- (void) showPopupAd: (CDVInvokedUrlCommand*)command;
+- (void) preloadAdLinkAd: (CDVInvokedUrlCommand*)command;
+- (void) showAdLinkAd: (CDVInvokedUrlCommand*)command;
 
 @end
