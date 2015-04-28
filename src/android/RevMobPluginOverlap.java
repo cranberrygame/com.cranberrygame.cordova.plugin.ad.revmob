@@ -140,7 +140,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		
 		//
 		String str1 = Util.md5("com.cranberrygame.cordova.plugin.ad.revmob: " + email);
-		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.: " + email);
+		String str2 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
 		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
 			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
 			revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), mediaId, null);
@@ -423,7 +423,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
     public void onResume(boolean multitasking) {
 		//
 		String str1 = Util.md5("com.cranberrygame.cordova.plugin.ad.revmob: " + email);
-		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.: " + email);
+		String str2 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
 		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
 			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
 			revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), mediaId, null);

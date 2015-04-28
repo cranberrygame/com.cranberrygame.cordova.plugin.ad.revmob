@@ -95,7 +95,7 @@
     
 	//
     NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.revmob: %@", email]];
-	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.: %@", email]];
+	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
 	if(licenseKey != Nil && ([licenseKey isEqualToString:str1] || [licenseKey isEqualToString:str2])){
 		NSLog(@"valid licenseKey");
 		[RevMobAds startSessionWithAppID:mediaId andDelegate:self];		
