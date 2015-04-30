@@ -1,7 +1,16 @@
 
 module.exports = {
 
-	//caution: revmob.setLicenseKey -> revmob.setUp
+	setLicenseKey: function(email, licenseKey) {
+		var self = this;	
+        cordova.exec(
+            null,
+            null,
+            'RevMobPlugin',
+            'setLicenseKey',			
+            [email, licenseKey]
+        ); 
+    },	
 	setUp: function(mediaId, isOverlap) {
 		var self = this;	
         cordova.exec(
@@ -78,16 +87,6 @@ module.exports = {
             'RevMobPlugin',
             'setUp',			
             [mediaId, isOverlap]
-        ); 
-    },
-	setLicenseKey: function(email, licenseKey) {
-		var self = this;	
-        cordova.exec(
-            null,
-            null,
-            'RevMobPlugin',
-            'setLicenseKey',			
-            [email, licenseKey]
         ); 
     },
 	preloadBannerAd: function() {

@@ -20,7 +20,6 @@
 //
 @property NSString *email;
 @property NSString *licenseKey;
-@property NSString *TEST_MEDIA_ID;
 //
 @property NSString *bannerPreviousPosition;
 @property NSString *bannerPreviousSize;

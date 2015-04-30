@@ -16,6 +16,17 @@
 @synthesize email;
 @synthesize licenseKey_;
 
+- (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
+    NSString *email = [command.arguments objectAtIndex: 0];
+    NSString *licenseKey = [command.arguments objectAtIndex: 1];
+    NSLog(@"%@", email);
+    NSLog(@"%@", licenseKey);
+    
+    //[self.commandDelegate runInBackground:^{
+        [self _setLicenseKey:email aLicenseKey:licenseKey];
+    //}];
+}
+
 - (void) setUp: (CDVInvokedUrlCommand*)command {
     //self.viewController
 	//NSString *adUnit = [command.arguments objectAtIndex: 0];
@@ -40,17 +51,6 @@
 			
     //[self.commandDelegate runInBackground:^{
 		[self _setUp:mediaId anIsOverlap:isOverlap];	
-    //}];
-}
-
-- (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
-    NSString *email = [command.arguments objectAtIndex: 0];
-    NSString *licenseKey = [command.arguments objectAtIndex: 1];
-    NSLog(@"%@", email);
-    NSLog(@"%@", licenseKey);
-    
-    //[self.commandDelegate runInBackground:^{
-        [self _setLicenseKey:email aLicenseKey:licenseKey];
     //}];
 }
 
@@ -141,14 +141,14 @@
 
 //cranberrygame start: PluginDelegate
 
-- (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap {
-	[pluginDelegate _setUp:mediaId anIsOverlap:isOverlap];
-}
-
 - (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
 	//[pluginDelegate _setLicenseKey:email aLicenseKey:licenseKey];	
 	self.email = email;
 	self.licenseKey_ = licenseKey;
+}
+
+- (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap {
+	[pluginDelegate _setUp:mediaId anIsOverlap:isOverlap];
 }
 
 - (void) _preloadBannerAd {

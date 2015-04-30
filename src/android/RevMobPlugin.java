@@ -37,8 +37,8 @@ interface Plugin {
 }
 
 interface PluginDelegate {
-	public void _setUp(String mediaId, boolean isOverlap);
 	public void _setLicenseKey(String email, String licenseKey);	
+	public void _setUp(String mediaId, boolean isOverlap);
 	public void _preloadBannerAd();
 	public void _showBannerAd(String position, String size);
 	public void _reloadBannerAd();
@@ -70,16 +70,16 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-		if (action.equals("setUp")) {
-			setUp(action, args, callbackContext);
-
-			return true;
-		}
-		else if (action.equals("setLicenseKey")) {
+		if (action.equals("setLicenseKey")) {
 			setLicenseKey(action, args, callbackContext);
 
 			return true;
 		}		
+		else if (action.equals("setUp")) {
+			setUp(action, args, callbackContext);
+
+			return true;
+		}
 		else if (action.equals("preloadBannerAd")) {
 			preloadBannerAd(action, args, callbackContext);
 			
@@ -134,6 +134,20 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 		return false; // Returning false results in a "MethodNotFound" error.
 	}
 	
+	private void setLicenseKey(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+		final String email = args.getString(0);
+		final String licenseKey = args.getString(1);				
+		Log.d(LOG_TAG, String.format("%s", email));			
+		Log.d(LOG_TAG, String.format("%s", licenseKey));
+		
+		cordova.getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				_setLicenseKey(email, licenseKey);
+			}
+		});
+	}
+	
 	private void setUp(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		//Activity activity=cordova.getActivity();
 		//webView
@@ -172,20 +186,6 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 			@Override
 			public void run() {
 				_setUp(mediaId, isOverlap);
-			}
-		});
-	}
-	
-	private void setLicenseKey(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-		final String email = args.getString(0);
-		final String licenseKey = args.getString(1);				
-		Log.d(LOG_TAG, String.format("%s", email));			
-		Log.d(LOG_TAG, String.format("%s", licenseKey));
-		
-		cordova.getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				_setLicenseKey(email, licenseKey);
 			}
 		});
 	}
@@ -302,15 +302,15 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 	//cranberrygame end: Plugin
 	
 	//cranberrygame start: RevMobPluginPluginDelegate
-	
-	public void _setUp(String mediaId, boolean isOverlap) {
-		pluginDelegate._setUp(mediaId, isOverlap);
-	}
 
 	public void _setLicenseKey(String email, String licenseKey) {
 		//pluginDelegate._setLicenseKey(email, licenseKey);
 		this.email = email;
 		this.licenseKey = licenseKey;
+	}
+	
+	public void _setUp(String mediaId, boolean isOverlap) {
+		pluginDelegate._setUp(mediaId, isOverlap);
 	}
 	
 	public void _preloadBannerAd() {

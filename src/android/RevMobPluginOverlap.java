@@ -20,9 +20,10 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.os.Build;
 import android.provider.Settings;
+import android.os.Handler;
+//md5
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import android.os.Handler;
 //Util
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -95,16 +96,15 @@ class Util {
 }
 
 public class RevMobPluginOverlap implements PluginDelegate {
-	protected Plugin plugin;	
-	//
 	protected static final String LOG_TAG = "RevMobPlugin";
-	//
-	protected String mediaId;
-	protected boolean isOverlap;
+	protected Plugin plugin;	
 	//
 	protected String email;
 	protected String licenseKey;
 	protected String TEST_MEDIA_ID = "553f02ab62ca37580b9830e7";
+	//
+	protected String mediaId;
+	protected boolean isOverlap;
 	//
 	protected String bannerPreviousPosition;	
 	protected String bannerPreviousSize;
@@ -132,6 +132,11 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		plugin = plugin_;
 	}
 
+	public void _setLicenseKey(String email, String licenseKey) {
+		this.email = email;
+		this.licenseKey = licenseKey;
+	}
+	
 	public void _setUp(String mediaId, boolean isOverlap) {
 		this.mediaId = mediaId;
 		this.isOverlap = isOverlap;
@@ -214,12 +219,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	        }		    
 		});
     }
-	
-	public void _setLicenseKey(String email, String licenseKey) {
-		this.email = email;
-		this.licenseKey = licenseKey;
-	}
-	
+
 	public void _preloadBannerAd() {
 		bannerAdPreload = true;
 		

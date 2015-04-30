@@ -16,7 +16,7 @@
 //
 @synthesize email;
 @synthesize licenseKey;
-@synthesize TEST_MEDIA_ID;
+static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 //
 @synthesize bannerPreviousPosition;
 @synthesize bannerPreviousSize;
@@ -84,14 +84,17 @@
     }
     return self;
 }
+
+- (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
+	self.email = email;
+	self.licenseKey = licenseKey;
+}
 	
 - (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap {	
 	self.mediaId = mediaId;
 	self.isOverlap = isOverlap;
 
     [self _setLicenseKey:((RevMobPlugin*)plugin).email aLicenseKey:((RevMobPlugin*)plugin).licenseKey_];
-	
-    TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
     
 	//
 	NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
@@ -122,11 +125,6 @@
         [output appendFormat:@"%02x", digest[i]];
     
     return  output;
-}
-
-- (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
-	self.email = email;
-	self.licenseKey = licenseKey;
 }
 
 - (void) _preloadBannerAd {

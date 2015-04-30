@@ -5,6 +5,9 @@ show revmob popup, link, banner, full screen (including accepts video option) ad
 
 requires revmob account https://www.revmobmobileadnetwork.com
 
+revmob-android-sdk-7.0.0
+revmob-ios-sdk-8.1.0
+
 this is open source cordova plugin.
 
 this has 2% ad traffic share code for supporting plugin development.
@@ -22,6 +25,7 @@ To-Do:
 ## Cordova cli ##
 ```c
 cordova plugin add com.cranberrygame.cordova.plugin.ad.revmob
+```
 
 ## Crosswalk ##
 ```c
@@ -36,6 +40,11 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.revmob
 ```c
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.revmob" source="plugins.cordova.io" />
 ```
+
+## Construct2 ##
+
+Download construct2 chartboost plugin and example
+https://plus.google.com/communities/117978754675005605917 
 
 # Server setting #
 ```c
@@ -141,15 +150,25 @@ window.revmob.showAdLinkAd();
 
 # Test #
 
+Youtube
+[![](http://img.youtube.com/vi/fThTXn88dNw/0.jpg)](https://www.youtube.com/watch?v=fThTXn88dNw&feature=youtu.be "Youtube")
+
+CordovaApp-debug.apk
+https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob/blob/master/doc/CordovaApp-debug.apk
+
 # Useful links #
 
 Cordova Admob (Ad plugin)<br>
 http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.admob<br>
 https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob<br>
-<br>
-<br>
+https://www.youtube.com/watch?v=xXrVb8E8gMM<br>
+Cordova Chartboost (Ad plugin)<br>
+http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.chartboost<br>
+https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.chartboost<br>
+https://www.youtube.com/watch?v=EQJLRbSKmPU&feature=youtu.be<br>
 Cordova RevMob (Ad plugin)<br>
 http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.revmob<br>
 https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob<br>
+https://www.youtube.com/watch?v=fThTXn88dNw<br>
 
 # Credits #
