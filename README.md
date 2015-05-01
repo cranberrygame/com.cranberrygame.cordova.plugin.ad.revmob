@@ -10,8 +10,10 @@ revmob-ios-sdk-8.1.0
 
 this is open source cordova plugin.
 
-this has 2% ad traffic share code for supporting plugin development.
-if you do not want to this, fork this github and remove this code.
+you can get free license from following app.
+https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/cordovapluginfreelicense/CordovaApp-debug.apk
+put window.revmob.setLicenseKey("youremail@yourdoamin.com", "yourlicensekey"); function call before setUp function call.
+if you do not call this function, this plugin will share 2% traffic with plugin developer for supporting plugin development.
 
 # Change log #
 ```c
@@ -158,17 +160,10 @@ https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob/blob
 
 # Useful links #
 
-Cordova Admob (Ad plugin)<br>
-http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.admob<br>
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob<br>
-https://www.youtube.com/watch?v=xXrVb8E8gMM<br>
-Cordova Chartboost (Ad plugin)<br>
-http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.chartboost<br>
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.chartboost<br>
-https://www.youtube.com/watch?v=EQJLRbSKmPU&feature=youtu.be<br>
-Cordova RevMob (Ad plugin)<br>
-http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.revmob<br>
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob<br>
-https://www.youtube.com/watch?v=fThTXn88dNw<br>
+Cordova monetisation-related plugins G+ community<br>
+https://plus.google.com/communities/116032133386884708413<br>
+<br>
+Construct2 monetisation-related plugins by cordova G+ community<br>
+https://plus.google.com/communities/117978754675005605917<br>
 
 # Credits #
