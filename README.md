@@ -10,12 +10,6 @@ revmob-ios-sdk-8.1.0
 
 this is open source cordova plugin.
 
-you can download the following app and get free license.
-https://play.google.com/store/apps/details?id=com.cranberrygame.cordovapluginfreelicense
-put the following function call before setUp function call in the javascript source code 
-window.revmob.setLicenseKey("youremailid@youremaildoamin.com", "yourFreeLicenseKey");
-if you do not call this function, then you share 2% traffic with this plugin developer for supporting plugin development.
-
 # Change log #
 ```c
 	
@@ -67,6 +61,9 @@ else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad
 */
 
 document.addEventListener("deviceready", function(){
+	//get free license from https://play.google.com/store/apps/details?id=com.cranberrygame.cordovapluginfreelicense
+	window.revmob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
+	
 	window.revmob.setUp(mediaId, isOverlap);
 
 	//banner ad callback

@@ -138,9 +138,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	}
 	
 	public void _setUp(String mediaId, boolean isOverlap) {
-		this.mediaId = mediaId;
-		this.isOverlap = isOverlap;
-
+		//
 		_setLicenseKey(((RevMobPlugin)plugin).email, ((RevMobPlugin)plugin).licenseKey);
 		
 		//
@@ -148,17 +146,20 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.revmob: " + email);
 		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
 			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
-			revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), mediaId, null);
 		}
 		else {
 			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
-			if (new Random().nextInt(100) <= 1) {//0~99					
-				revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), TEST_MEDIA_ID, null);
-			}
-			else {
-				revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), mediaId, null);
-			}
+			
+			Util.alert(plugin.getCordova().getActivity(),"Cordova RevMob: nvalid email / license key.");
+			
+			return;
 		}
+
+		//
+		this.mediaId = mediaId;
+		this.isOverlap = isOverlap;
+
+		revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), mediaId, null);		
 		
 		lastOrientation = -1;		
 		handleLayoutChangeOverlap();
@@ -421,22 +422,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
     }
       
     public void onResume(boolean multitasking) {
-		//
-		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
-		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.revmob: " + email);
-		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
-			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
-			revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), mediaId, null);
-		}
-		else {
-			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
-			if (new Random().nextInt(100) <= 1) {//0~99					
-				revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), TEST_MEDIA_ID, null);
-			}
-			else {
-				revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), mediaId, null);
-			}
-		}	
+		revmob = RevMob.startWithListenerForWrapper(plugin.getCordova().getActivity(), mediaId, null);
 		
         if (bannerView != null) {
 //            bannerView.resume();

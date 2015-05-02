@@ -15,8 +15,7 @@
 @synthesize isTest;
 //
 @synthesize email;
-@synthesize licenseKey;
-static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
+@synthesize licenseKey_;
 //
 @synthesize bannerPreviousPosition;
 @synthesize bannerPreviousSize;
@@ -87,31 +86,37 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 
 - (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
 	self.email = email;
-	self.licenseKey = licenseKey;
+	self.licenseKey_ = licenseKey;
 }
 	
 - (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap {	
-	self.mediaId = mediaId;
-	self.isOverlap = isOverlap;
 
     [self _setLicenseKey:((RevMobPlugin*)plugin).email aLicenseKey:((RevMobPlugin*)plugin).licenseKey_];
     
 	//
 	NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
-    NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.revmob: %@", email]];
-	if(licenseKey != Nil && ([licenseKey isEqualToString:str1] || [licenseKey isEqualToString:str2])){
+	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.revmob: %@", email]];
+	if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
 		NSLog(@"valid licenseKey");
-		[RevMobAds startSessionWithAppID:mediaId andDelegate:self];		
 	}
 	else {
 		NSLog(@"invalid licenseKey");
-		if (arc4random() % 100 <= 1) {//0 ~ 99			
-			[RevMobAds startSessionWithAppID:TEST_MEDIA_ID andDelegate:self];			
-		}
-		else {
-			[RevMobAds startSessionWithAppID:mediaId andDelegate:self];
-		}
+
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" 
+                                                message:@"Cordova RevMob: invalid email / license key." 
+                                               delegate:nil 
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+		[alert show];
+		
+		return;
 	}
+	
+	//
+	self.mediaId = mediaId;
+	self.isOverlap = isOverlap;
+    
+    [RevMobAds startSessionWithAppID:mediaId andDelegate:self];
 }
 
 - (NSString*) md5:(NSString*) input {

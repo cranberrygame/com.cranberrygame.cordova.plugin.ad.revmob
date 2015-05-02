@@ -19,7 +19,7 @@
 @property BOOL isTest;
 //
 @property NSString *email;
-@property NSString *licenseKey;
+@property NSString *licenseKey_;
 //
 @property NSString *bannerPreviousPosition;
 @property NSString *bannerPreviousSize;
