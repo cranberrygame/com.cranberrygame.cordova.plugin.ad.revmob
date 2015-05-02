@@ -8,6 +8,8 @@ requires revmob account https://www.revmobmobileadnetwork.com
 revmob-android-sdk-7.0.0
 revmob-ios-sdk-8.1.0
 
+need to set license, get free license from https://play.google.com/store/apps/details?id=com.cranberrygame.cordovapluginfreelicense
+
 this is open source cordova plugin.
 
 # Change log #
