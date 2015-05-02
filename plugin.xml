@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.cranberrygame.cordova.plugin.ad.revmob"
-    version="1.0.13">
+    version="1.0.14”>
 	
     <name>Cordova RevMob plugin</name>
     <description>Cordova RevMob plugin</description>
