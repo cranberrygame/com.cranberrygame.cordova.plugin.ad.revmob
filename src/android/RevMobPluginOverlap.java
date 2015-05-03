@@ -150,7 +150,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		else {
 			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
 			
-			Util.alert(plugin.getCordova().getActivity(),"Cordova RevMob: nvalid email / license key.");
+			Util.alert(plugin.getCordova().getActivity(),"Cordova RevMob: nvalid email / license key. get free license from http://cranberrygame.github.io");
 			
 			return;
 		}

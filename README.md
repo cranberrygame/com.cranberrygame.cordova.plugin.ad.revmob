@@ -8,7 +8,7 @@ requires revmob account https://www.revmobmobileadnetwork.com
 revmob-android-sdk-7.0.0
 revmob-ios-sdk-8.1.0
 
-need to set license, get free license from https://play.google.com/store/apps/details?id=com.cranberrygame.cordovapluginfreelicense
+need to set license, get free license from http://cranberrygame.github.io
 
 this is open source cordova plugin.
 
@@ -63,7 +63,7 @@ else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad
 */
 
 document.addEventListener("deviceready", function(){
-	//get free license from https://play.google.com/store/apps/details?id=com.cranberrygame.cordovapluginfreelicense
+	//need to set license, get free license from http://cranberrygame.github.io
 	window.revmob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 	
 	window.revmob.setUp(mediaId, isOverlap);
@@ -154,10 +154,7 @@ https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob/blob
 
 # Useful links #
 
-Cordova promotion & monetisation plugins G+ community<br>
-https://plus.google.com/communities/116032133386884708413<br>
-<br>
-C2 promotion & monetisation plugins by cordova G+ community<br>
-https://plus.google.com/communities/117978754675005605917<br>
+Cordova promotion & monetisation plugins<br>
+http://cranberrygame.github.io
 
 # Credits #
