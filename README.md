@@ -1,16 +1,18 @@
+Cordova RevMob plugin (Free)
+====================
 # Overview #
 show revmob popup, link, banner, full screen (including accepts video option) ad
 
-[android, ios] [crosswalk] [cordova cli]
+[android, ios] [cordova cli] [xdk]
 
 requires revmob account https://www.revmobmobileadnetwork.com
 
 revmob-android-sdk-7.0.0
 revmob-ios-sdk-8.1.0
 
-need to set license, get free license from http://cranberrygame.github.io
-
 this is open source cordova plugin.
+
+need to set license, get free license from http://cranberrygame.github.io?referrer=github
 
 # Change log #
 ```c
@@ -26,7 +28,7 @@ To-Do:
 cordova plugin add com.cranberrygame.cordova.plugin.ad.revmob
 ```
 
-## Crosswalk ##
+## Xdk ##
 ```c
 XDK PORJECTS - your_xdk_project - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS AND PERMISSIONS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
 
@@ -63,7 +65,7 @@ else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad
 */
 
 document.addEventListener("deviceready", function(){
-	//need to set license, get free license from http://cranberrygame.github.io
+	//need to set license, get free license from http://cranberrygame.github.io?referrer=github
 	window.revmob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 	
 	window.revmob.setUp(mediaId, isOverlap);
@@ -150,11 +152,11 @@ window.revmob.showAdLinkAd();
 [![](http://img.youtube.com/vi/fThTXn88dNw/0.jpg)](https://www.youtube.com/watch?v=fThTXn88dNw&feature=youtu.be "Youtube")
 
 You can also run following test apk.
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob/blob/master/doc/CordovaApp-debug.apk
+https://dl.dropboxusercontent.com/u/186681453/free/revmob/CordovaApp-debug.apk
 
 # Useful links #
 
 Cordova promotion & monetisation plugins<br>
-http://cranberrygame.github.io
+http://cranberrygame.github.io?referrer=github
 
 # Credits #
