@@ -43,8 +43,6 @@ import com.revmob.ads.fullscreen.RevMobFullscreen;
 import com.revmob.ads.link.RevMobLink;
 import com.revmob.ads.popup.RevMobPopup;
 import com.revmob.internal.RMLog;
-//
-import java.util.*;
 
 class Util {
 
@@ -99,10 +97,6 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	protected static final String LOG_TAG = "RevMobPlugin";
 	protected Plugin plugin;	
 	//
-	protected String email;
-	protected String licenseKey;
-	protected String TEST_MEDIA_ID = "553f02ab62ca37580b9830e7";
-	//
 	protected String mediaId;
 	protected boolean isOverlap;
 	//
@@ -133,29 +127,9 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	}
 
 	public void _setLicenseKey(String email, String licenseKey) {
-		this.email = email;
-		this.licenseKey = licenseKey;
 	}
 	
 	public void _setUp(String mediaId, boolean isOverlap) {
-		//
-		_setLicenseKey(((RevMobPlugin)plugin).email, ((RevMobPlugin)plugin).licenseKey);
-		
-		//
-		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
-		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.revmob: " + email);
-		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
-			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
-		}
-		else {
-			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
-			
-			Util.alert(plugin.getCordova().getActivity(),"Cordova RevMob: nvalid email / license key. get free license from http://cranberrygame.github.io");
-			
-			return;
-		}
-
-		//
 		this.mediaId = mediaId;
 		this.isOverlap = isOverlap;
 

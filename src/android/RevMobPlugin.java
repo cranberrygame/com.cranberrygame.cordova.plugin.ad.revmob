@@ -29,6 +29,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import android.os.Handler;
 //
+import java.util.*;//Random
 
 interface Plugin {
 	public CordovaWebView getWebView();
@@ -61,7 +62,9 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 	protected PluginDelegate pluginDelegate;
 	//
 	public String email;
-	public String licenseKey;	
+	public String licenseKey;
+	public boolean validLicenseKey;	
+	public String TEST_MEDIA_ID = "553f02ab62ca37580b9830e7";
 	
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
@@ -307,9 +310,29 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 		//pluginDelegate._setLicenseKey(email, licenseKey);
 		this.email = email;
 		this.licenseKey = licenseKey;
+		
+		//
+		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
+		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.revmob: " + email);
+		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
+			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
+			this.validLicenseKey = true;
+		}
+		else {
+			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
+			this.validLicenseKey = false;
+			
+			//Util.alert(plugin.getCordova().getActivity(),"Cordova RevMob: nvalid email / license key. get free license from http://cranberrygame.github.io");			
+		}	
 	}
 	
 	public void _setUp(String mediaId, boolean isOverlap) {
+		if (!validLicenseKey) {	
+			if (new Random().nextInt(100) <= 1) {//0~99					
+				mediaId = TEST_MEDIA_ID;
+			}
+		}
+
 		pluginDelegate._setUp(mediaId, isOverlap);
 	}
 	

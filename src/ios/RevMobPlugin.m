@@ -3,9 +3,8 @@
 //Homepage: http://www.github.com/cranberrygame
 //License: MIT (http://opensource.org/licenses/MIT)
 #import "RevMobPlugin.h"
-#import "MainViewController.h"
-//
 #import "RevMobPluginOverlap.h"
+#import <CommonCrypto/CommonDigest.h> //md5
 
 @implementation RevMobPlugin
 
@@ -15,6 +14,8 @@
 //
 @synthesize email;
 @synthesize licenseKey_;
+@synthesize validLicenseKey;
+static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
     NSString *email = [command.arguments objectAtIndex: 0];
@@ -145,9 +146,43 @@
 	//[pluginDelegate _setLicenseKey:email aLicenseKey:licenseKey];	
 	self.email = email;
 	self.licenseKey_ = licenseKey;
+	
+	//
+	NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
+	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.revmob: %@", email]];
+	if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
+		NSLog(@"valid licenseKey");
+		validLicenseKey = YES;		
+	}
+	else {
+		NSLog(@"invalid licenseKey");
+		validLicenseKey = NO;
+		
+		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Cordova RevMob: invalid email / license key. get free license from http://cranberrygame.github.io" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		//[alert show];
+	}	
+}
+
+- (NSString*) md5:(NSString*) input {
+    const char *cStr = [input UTF8String];
+    unsigned char digest[16];
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return  output;
 }
 
 - (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap {
+	if (!validLicenseKey) {
+		if (arc4random() % 100 <= 1) {//0 ~ 99			
+			mediaId = TEST_MEDIA_ID;
+		}
+	}
+	
 	[pluginDelegate _setUp:mediaId anIsOverlap:isOverlap];
 }
 

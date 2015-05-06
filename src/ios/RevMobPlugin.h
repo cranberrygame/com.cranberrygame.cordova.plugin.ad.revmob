@@ -2,11 +2,7 @@
 //Email: cranberrygame@yahoo.com
 //Homepage: http://www.github.com/cranberrygame
 //License: MIT (http://opensource.org/licenses/MIT)
-#import <Foundation/Foundation.h>
 #import <Cordova/CDV.h>
-//
-#import <RevMobAds/RevMobAds.h>
-#import <RevMobAds/RevMobAdsDelegate.h>
 
 @protocol Plugin <NSObject>
 - (UIWebView*) getWebView;
@@ -16,8 +12,8 @@
 @end
 
 @protocol PluginDelegate <NSObject>
-- (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap;
 - (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey;
+- (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap;
 - (void) _preloadBannerAd;
 - (void) _showBannerAd:(NSString *)position aSize:(NSString *)size;
 - (void) _reloadBannerAd;
@@ -28,7 +24,6 @@
 - (void) _showPopupAd;
 - (void) _preloadAdLinkAd;
 - (void) _showAdLinkAd;
-
 @end
 
 @interface RevMobPlugin : CDVPlugin <Plugin, PluginDelegate>
@@ -39,9 +34,10 @@
 //
 @property NSString *email;
 @property NSString *licenseKey_;
+@property BOOL validLicenseKey;
 	
-- (void) setUp: (CDVInvokedUrlCommand*)command;
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command;
+- (void) setUp: (CDVInvokedUrlCommand*)command;
 - (void) preloadBannerAd: (CDVInvokedUrlCommand*)command;
 - (void) showBannerAd: (CDVInvokedUrlCommand*)command;
 - (void) reloadBannerAd: (CDVInvokedUrlCommand*)command;

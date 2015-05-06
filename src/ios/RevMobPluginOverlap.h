@@ -2,13 +2,9 @@
 //Email: cranberrygame@yahoo.com
 //Homepage: http://www.github.com/cranberrygame
 //License: MIT (http://opensource.org/licenses/MIT)
-#import <Foundation/Foundation.h>
-#import <Cordova/CDV.h>
+#import "RevMobPlugin.h"
 //
 #import <RevMobAds/RevMobAds.h>
-#import <RevMobAds/RevMobAdsDelegate.h>
-//
-#import "RevMobPlugin.h"
 
 @interface RevMobPluginOverlap : NSObject <PluginDelegate, RevMobAdsDelegate>
 
@@ -17,9 +13,6 @@
 @property NSString *mediaId;
 @property BOOL isOverlap;
 @property BOOL isTest;
-//
-@property NSString *email;
-@property NSString *licenseKey_;
 //
 @property NSString *bannerPreviousPosition;
 @property NSString *bannerPreviousSize;
