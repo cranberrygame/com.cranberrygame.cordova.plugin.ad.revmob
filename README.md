@@ -1,4 +1,4 @@
-Cordova RevMob plugin (Free)
+Cordova RevMob plugin
 ====================
 # Overview #
 show revmob popup, link, banner, full screen (including accepts video option) ad
@@ -11,8 +11,6 @@ revmob-android-sdk-7.0.0
 revmob-ios-sdk-8.1.0
 
 this is open source cordova plugin.
-
-need to set license, get free license from http://cranberrygame.github.io?referrer=github
 
 # Change log #
 ```c
@@ -66,7 +64,7 @@ else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad
 
 document.addEventListener("deviceready", function(){
 	//if no license key, 2% ad traffic share for dev support.
-	//you can get free license key from http://cranberrygame.github.io?referrer=github
+	//you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
 	//window.revmob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 	
 	window.revmob.setUp(mediaId, isOverlap);

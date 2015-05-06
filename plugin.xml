@@ -2,13 +2,13 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.cranberrygame.cordova.plugin.ad.revmob"
-    version="1.0.19">
+    version="1.0.20">
 	
-    <name>Cordova RevMob plugin (Free)</name>
+    <name>Cordova RevMob plugin</name>
     <description>show revmob popup, link, banner, full screen (including accepts video option) ad</description>
     <author>Sang Ki Kwon (Cranberrygame)</author>	
     <license>MIT</license>
-    <keywords>cordova,plugin,ad,revmob,free,monetisation</keywords>
+    <keywords>cordova,plugin,ad,revmob,monetisation</keywords>
     <repo>https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob</repo>
     <issue>https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob/issues</issue>	
 	<engines>
