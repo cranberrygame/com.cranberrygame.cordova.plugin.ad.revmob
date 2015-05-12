@@ -143,8 +143,8 @@ window.revmob.preloadAdLinkAd();
 window.revmob.showAdLinkAd();
 ```
 # Examples #
-<a href="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
-<a href="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob/blob/master/example/advanced/index.html">example/advanced/index.html</a>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-revmob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-revmob/blob/master/example/advanced/index.html">example/advanced/index.html</a>
 
 # Test #
 
@@ -155,7 +155,7 @@ https://dl.dropboxusercontent.com/u/186681453/free/revmob/CordovaApp-debug.apk
 
 # Useful links #
 
-Cordova promotion & monetisation plugins<br>
+Plugin For Cordova<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #
