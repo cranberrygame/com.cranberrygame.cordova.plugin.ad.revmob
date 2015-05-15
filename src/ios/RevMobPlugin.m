@@ -1,6 +1,6 @@
 //Copyright (c) 2014 Sang Ki Kwon (Cranberrygame)
 //Email: cranberrygame@yahoo.com
-//Homepage: http://www.github.com/cranberrygame
+//Homepage: http://cranberrygame.github.io
 //License: MIT (http://opensource.org/licenses/MIT)
 #import "RevMobPlugin.h"
 #import "RevMobPluginOverlap.h"
@@ -158,7 +158,7 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 		NSLog(@"invalid licenseKey");
 		validLicenseKey = NO;
 		
-		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Cordova RevMob: invalid email / license key. get free license from http://cranberrygame.github.io" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Cordova RevMob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		//[alert show];
 	}	
 }
@@ -177,13 +177,16 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 }
 
 - (void) _setUp:(NSString *)mediaId anIsOverlap:(BOOL)isOverlap {
+	self.mediaId = mediaId;
+	self.isOverlap = isOverlap;
+
 	if (!validLicenseKey) {
 		if (arc4random() % 100 <= 1) {//0 ~ 99			
-			mediaId = TEST_MEDIA_ID;
+			self.mediaId = TEST_MEDIA_ID;
 		}
 	}
 	
-	[pluginDelegate _setUp:mediaId anIsOverlap:isOverlap];
+	[pluginDelegate _setUp:self.mediaId anIsOverlap:self.isOverlap];
 }
 
 - (void) _preloadBannerAd {

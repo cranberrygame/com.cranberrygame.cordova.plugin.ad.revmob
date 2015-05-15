@@ -40,6 +40,9 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.revmob
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.revmob" source="plugins.cordova.io" />
 ```
 
+## Construct2 ##
+Download construct2 plugin: https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/revmob/construct2.html
+
 # Server setting #
 ```c
 ```
@@ -155,7 +158,7 @@ https://dl.dropboxusercontent.com/u/186681453/free/revmob/CordovaApp-debug.apk
 
 # Useful links #
 
-Plugin For Cordova<br>
+Plugins For Cordova<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #

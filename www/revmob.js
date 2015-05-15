@@ -1,6 +1,10 @@
 
 module.exports = {
-
+	_isShowingBannerAd: false,
+	_isShowingFullScreenAd: false,
+	_isShowingPopupAd: false,
+	_isShowingAdLinkAd: false,
+	//
 	setLicenseKey: function(email, licenseKey) {
 		var self = this;	
         cordova.exec(
@@ -34,10 +38,14 @@ module.exports = {
 							self.onFullScreenAdLoaded();
 					}
 					else if (result == "onFullScreenAdShown") {
+						self._isShowingFullScreenAd = true;
+					
 						if (self.onFullScreenAdShown)
 							self.onFullScreenAdShown();
 					}
 					else if (result == "onFullScreenAdHidden") {
+						self._isShowingFullScreenAd = false;
+					
 						 if (self.onFullScreenAdHidden)
 							self.onFullScreenAdHidden();
 					}					
@@ -50,10 +58,14 @@ module.exports = {
 							self.onPopupAdLoaded();
 					}
 					else if (result == "onPopupAdShown") {
+						self._isShowingPopupAd = true;
+					
 						if (self.onPopupAdShown)
 							self.onPopupAdShown();
 					}
 					else if (result == "onPopupAdHidden") {
+						self._isShowingPopupAd = false;
+					
 						 if (self.onPopupAdHidden)
 							self.onPopupAdHidden();
 					}
@@ -66,10 +78,14 @@ module.exports = {
 							self.onAdLinkAdLoaded();
 					}
 					else if (result == "onAdLinkAdShown") {
+						self._isShowingAdLinkAd = true;
+						
 						if (self.onAdLinkAdShown)
 							self.onAdLinkAdShown();
 					}
 					else if (result == "onAdLinkAdHidden") {
+						self._isShowingAdLinkAd = false;
+					
 						 if (self.onAdLinkAdHidden)
 							self.onAdLinkAdHidden();
 					}
@@ -101,6 +117,9 @@ module.exports = {
     },
     showBannerAd: function(position, size) {
 		var self = this;	
+		
+		self._isShowingBannerAd = true;
+		
         cordova.exec(
             null,
             null,
@@ -121,6 +140,9 @@ module.exports = {
     },
     hideBannerAd: function() {
 		var self = this;	
+		
+		self._isShowingBannerAd = false;
+		
         cordova.exec(
             null,
             null,
@@ -190,6 +212,18 @@ module.exports = {
             []
         ); 
     },
+	isShowingBannerAd: function() {
+		return this._isShowingBannerAd;
+	},
+	isShowingFullScreenAd: function() {
+		return this._isShowingFullScreenAd;
+	},		
+	isShowingPopupAd: function() {
+		return this._isShowingPopupAd;
+	},		
+	isShowingAdLinkAd: function() {
+		return this._isShowingAdLinkAd;
+	},		
 	onBannerAdPreloaded: null,
 	onBannerAdLoaded: null,
 	//
