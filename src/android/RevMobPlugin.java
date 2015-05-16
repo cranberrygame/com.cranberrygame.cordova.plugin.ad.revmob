@@ -69,6 +69,24 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
     }
+		
+  	@Override
+    public void onPause(boolean multitasking) {		
+        super.onPause(multitasking);
+		pluginDelegate.onPause(multitasking);		
+    }
+      
+    @Override
+    public void onResume(boolean multitasking) {
+        super.onResume(multitasking);
+        pluginDelegate.onResume(multitasking);
+    }
+  	
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+		pluginDelegate.onDestroy();		
+    }
 	
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -375,24 +393,6 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 	public void _showAdLinkAd() {
 		pluginDelegate._showAdLinkAd();
 	}
-	
-  	@Override
-    public void onPause(boolean multitasking) {		
-		pluginDelegate.onPause(multitasking);		
-        super.onPause(multitasking);
-    }
-      
-    @Override
-    public void onResume(boolean multitasking) {
-        pluginDelegate.onResume(multitasking);
-        super.onResume(multitasking);
-    }
-  	
-    @Override
-    public void onDestroy() {
-		pluginDelegate.onDestroy();		
-        super.onDestroy();
-    }
 	
 	//cranberrygame end: RevMobPluginPluginDelegate
 }

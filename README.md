@@ -1,16 +1,18 @@
 Cordova RevMob plugin
 ====================
 # Overview #
-show revmob popup, link, banner, full screen (including accepts video option) ad
+Show revmob popup, link, banner, full screen (including accepts video option) ad
 
 [android, ios] [cordova cli] [xdk]
 
-requires revmob account https://www.revmobmobileadnetwork.com
+Requires revmob account https://www.revmobmobileadnetwork.com
 
 revmob-android-sdk-7.0.0
 revmob-ios-sdk-8.1.0
 
-this is open source cordova plugin.
+This is open source cordova plugin.
+
+You can see Plugins For Cordova in one page: http://cranberrygame.github.io?referrer=github
 
 # Change log #
 ```c
@@ -154,7 +156,7 @@ window.revmob.showAdLinkAd();
 [![](http://img.youtube.com/vi/fThTXn88dNw/0.jpg)](https://www.youtube.com/watch?v=fThTXn88dNw&feature=youtu.be "Youtube")
 
 You can also run following test apk.
-https://dl.dropboxusercontent.com/u/186681453/free/revmob/CordovaApp-debug.apk
+https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/revmob/apk.html
 
 # Useful links #
 
@@ -162,3 +164,4 @@ Plugins For Cordova<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #
+
