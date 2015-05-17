@@ -34,6 +34,7 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 	//NSString *adUnitFullScreen = [command.arguments objectAtIndex: 1];
 	//BOOL isOverlap = [[command.arguments objectAtIndex: 2] boolValue];
 	//BOOL isTest = [[command.arguments objectAtIndex: 3] boolValue];
+	//NSArray *zoneIds = [command.arguments objectAtIndex:4];	
 	//NSLog(@"%@", adUnit);
 	//NSLog(@"%@", adUnitFullScreen);
 	//NSLog(@"%d", isOverlap);

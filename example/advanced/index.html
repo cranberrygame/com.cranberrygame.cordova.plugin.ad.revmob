@@ -29,14 +29,14 @@ document.addEventListener("deviceready", function(){
 	
 	window.revmob.setUp(mediaId, isOverlap);
 
-	//banner ad callback
+	//
 	window.revmob.onBannerAdPreloaded = function() {
 		alert('onBannerAdPreloaded');
 	};
 	window.revmob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
-	//full screen ad callback
+	//
 	window.revmob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');
 	};
@@ -49,7 +49,7 @@ document.addEventListener("deviceready", function(){
 	window.revmob.onFullScreenAdHidden = function() {
 		alert('onFullScreenAdHidden');
 	};
-	//popup ad callback
+	//
 	window.revmob.onPopupAdPreloaded = function() {
 		alert('onPopupAdPreloaded');
 	};
@@ -62,7 +62,7 @@ document.addEventListener("deviceready", function(){
 	window.revmob.onPopupAdHidden = function() {
 		alert('onPopupAdHidden');
 	};
-	//ad link ad callback
+	//
 	window.revmob.onAdLinkAdPreloaded = function() {
 		alert('onAdLinkAdPreloaded');
 	};
@@ -109,9 +109,9 @@ size: <select id="size">
 			<option value='SKYSCRAPER'>SKYSCRAPER (120x600, Tablets, ipad only)</option>
 			<option value='SMART_BANNER' selected>SMART_BANNER (Auto size, Phones and Tablets, if other size not supported)</option>
 		</select><br>
-<button onclick="window.admob.preloadBannerAd();">preloadBannerAd</button><br>		
-<button onclick="window.admob.showBannerAd(document.getElementById('position').value , document.getElementById('size').value);">showBannerAd</button><br>
-<button onclick="window.admob.reloadBannerAd();">reloadBannerAd</button><br>
-<button onclick="window.admob.hideBannerAd();">hideBannerAd</button>
+<button onclick="window.revmob.preloadBannerAd();">preloadBannerAd</button><br>		
+<button onclick="window.revmob.showBannerAd(document.getElementById('position').value , document.getElementById('size').value);">showBannerAd</button><br>
+<button onclick="window.revmob.reloadBannerAd();">reloadBannerAd</button><br>
+<button onclick="window.revmob.hideBannerAd();">hideBannerAd</button>
 </body>
 </html>

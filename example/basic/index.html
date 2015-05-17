@@ -89,14 +89,25 @@ size: 	'BANNER' (320x50, Phones and Tablets)
 */
 </script>
 
-<p><button onclick="window.admob.preloadBannerAd();">preloadBannerAd</button></p>
-<p><button onclick="window.admob.showBannerAd('top-center', 'SMART_BANNER');">showBannerAd top-center</button></p>
-<p><button onclick="window.admob.showBannerAd('bottom-center', 'SMART_BANNER');">showBannerAd bottom-center</button></p>
-<p><button onclick="window.admob.reloadBannerAd();">reloadBannerAd</button></p>
-<p><button onclick="window.admob.hideBannerAd();">hideBannerAd</button></p>
+<p><button onclick="window.revmob.preloadBannerAd();">preloadBannerAd</button></p>
+<p><button onclick="window.revmob.showBannerAd('top-center', 'SMART_BANNER');">showBannerAd top-center</button></p>
+<p><button onclick="window.revmob.showBannerAd('bottom-center', 'SMART_BANNER');">showBannerAd bottom-center</button></p>
+<p><button onclick="window.revmob.reloadBannerAd();">reloadBannerAd</button></p>
+<p><button onclick="window.revmob.hideBannerAd();">hideBannerAd</button></p>
 <br>
-<p><button onclick="window.admob.preloadFullScreenAd();">preloadFullScreenAd</button></p>
-<p><button onclick="window.admob.showFullScreenAd();">showFullScreenAd</button></p>
+<p><button onclick="window.revmob.preloadFullScreenAd();">preloadFullScreenAd</button></p>
+<p><button onclick="window.revmob.showFullScreenAd();">showFullScreenAd</button></p>
+<br>
+<p><button onclick="window.revmob.preloadPopupAd();">preloadPopupAd</button></p>
+<p><button onclick="window.revmob.showPopupAd();">showPopupAd</button></p>
+<br>
+<p><button onclick="window.revmob.preloadAdLinkAd();">preloadAdLinkAd</button></p>
+<p><button onclick="window.revmob.showAdLinkAd();">showAdLinkAd</button></p>
+<br>
+<p><button onclick="alert(window.revmob.isShowingBannerAd());">isShowingBannerAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingFullScreenAd());">isShowingFullScreenAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingPopupAd());">isShowingPopupAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingAdLinkAd());">isShowingAdLinkAd</button></p>
 
 </body>
 </html>

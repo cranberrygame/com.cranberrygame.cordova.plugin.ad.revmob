@@ -48,7 +48,8 @@ module.exports = {
 					
 						 if (self.onFullScreenAdHidden)
 							self.onFullScreenAdHidden();
-					}					
+					}
+					//
 					if (result == "onPopupAdPreloaded") {
 						if (self.onPopupAdPreloaded)
 							self.onPopupAdPreloaded();
@@ -69,6 +70,7 @@ module.exports = {
 						 if (self.onPopupAdHidden)
 							self.onPopupAdHidden();
 					}
+					//
 					if (result == "onAdLinkAdPreloaded") {
 						if (self.onAdLinkAdPreloaded)
 							self.onAdLinkAdPreloaded();
@@ -172,6 +174,7 @@ module.exports = {
             []
         ); 
     },
+	//
 	preloadPopupAd: function() {
 		var self = this;	
         cordova.exec(
@@ -192,6 +195,7 @@ module.exports = {
             []
         ); 
     },
+	//
 	preloadAdLinkAd: function() {
 		var self = this;	
         cordova.exec(

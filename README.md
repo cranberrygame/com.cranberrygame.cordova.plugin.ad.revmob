@@ -44,7 +44,8 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.revmob
 
 ## Construct2 ##
 Download construct2 plugin: https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/revmob/construct2.html
-
+<br>
+Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV
 # Server setting #
 ```c
 ```
@@ -74,14 +75,14 @@ document.addEventListener("deviceready", function(){
 	
 	window.revmob.setUp(mediaId, isOverlap);
 
-	//banner ad callback
+	//
 	window.revmob.onBannerAdPreloaded = function() {
 		alert('onBannerAdPreloaded');
 	};
 	window.revmob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
-	//full screen ad callback
+	//
 	window.revmob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');
 	};
@@ -94,7 +95,7 @@ document.addEventListener("deviceready", function(){
 	window.revmob.onFullScreenAdHidden = function() {
 		alert('onFullScreenAdHidden');
 	};
-	//popup ad callback
+	//
 	window.revmob.onPopupAdPreloaded = function() {
 		alert('onPopupAdPreloaded');
 	};
@@ -107,7 +108,7 @@ document.addEventListener("deviceready", function(){
 	window.revmob.onPopupAdHidden = function() {
 		alert('onPopupAdHidden');
 	};
-	//ad link ad callback
+	//
 	window.revmob.onAdLinkAdPreloaded = function() {
 		alert('onAdLinkAdPreloaded');
 	};
@@ -146,6 +147,11 @@ window.revmob.showPopupAd();
 
 window.revmob.preloadAdLinkAd();
 window.revmob.showAdLinkAd();
+
+alert(window.adbuddiz.isShowingBannerAd());//boolean: true or false
+alert(window.adbuddiz.isShowingFullScreenAd());//boolean: true or false
+alert(window.adbuddiz.isShowingPopupAd());//boolean: true or false
+alert(window.adbuddiz.isShowingAdLinkAd());//boolean: true or false
 ```
 # Examples #
 <a href="https://github.com/cranberrygame/cordova-plugin-ad-revmob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
@@ -164,4 +170,3 @@ Plugins For Cordova<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #
-
