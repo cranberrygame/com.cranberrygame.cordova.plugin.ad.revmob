@@ -145,7 +145,9 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		//http://stackoverflow.com/questions/24539578/cordova-plugin-listening-to-device-orientation-change-is-it-possible
 		//http://developer.android.com/reference/android/view/View.OnLayoutChangeListener.html
 		//https://gitshell.com/lvxudong/A530_packages_app_Camera/blob/master/src/com/android/camera/ActivityBase.java
-    	plugin.getWebView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){
+    	plugin.getWebView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//cordova5 build error
+		//plugin.getWebView().getRootView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//cordova5 build error
+		//plugin.getWebView().getView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//fix cordova5 build error		
 		    @Override
 	        public void onLayoutChange(View v, int left, int top, int right, int bottom,
 	                int oldLeft, int oldTop, int oldRight, int oldBottom) {
@@ -250,9 +252,12 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		if(bannerViewLayout == null) {
 			bannerViewLayout = new RelativeLayout(plugin.getCordova().getActivity());//	
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-			//webView.addView(bannerViewLayout, params);
 			bannerViewLayout.setLayoutParams(params);
-			plugin.getWebView().addView(bannerViewLayout);
+			//plugin.getWebView().addView(bannerViewLayout, params);
+			plugin.getWebView().addView(bannerViewLayout);//cordova5 build error
+			//((ViewGroup)plugin.getWebView().getRootView()).addView(bannerViewLayout);//cordova5 build error
+			//((ViewGroup)plugin.getWebView().getView()).addView(bannerViewLayout);//fix cordova5 build error
+			
 		}
 		
 		//http://tigerwoods.tistory.com/11
@@ -449,6 +454,13 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdDisplayed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDisplayed"));
+			
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
+			pr.setKeepCallback(true);
+			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.setKeepCallback(true);
+			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
 		}
 
 		@Override
@@ -459,6 +471,13 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdDismiss() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismiss"));
+			
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
+			pr.setKeepCallback(true);
+			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.setKeepCallback(true);
+			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
 		}
 		
 		@Override

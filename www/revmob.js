@@ -28,8 +28,20 @@ module.exports = {
 						if (self.onBannerAdLoaded)
 							self.onBannerAdLoaded();
 					}
+					else if (result == "onBannerAdShown") {
+						self._isShowingBannerAd = true;
+					
+						if (self.onBannerAdShown)
+							self.onBannerAdShown();
+					}
+					else if (result == "onBannerAdHidden") {
+						self._isShowingBannerAd = false;
+					
+						 if (self.onBannerAdHidden)
+							self.onBannerAdHidden();
+					}
 					//
-					if (result == "onFullScreenAdPreloaded") {
+					else if (result == "onFullScreenAdPreloaded") {
 						if (self.onFullScreenAdPreloaded)
 							self.onFullScreenAdPreloaded();
 					}
@@ -50,7 +62,7 @@ module.exports = {
 							self.onFullScreenAdHidden();
 					}
 					//
-					if (result == "onPopupAdPreloaded") {
+					else if (result == "onPopupAdPreloaded") {
 						if (self.onPopupAdPreloaded)
 							self.onPopupAdPreloaded();
 					}
@@ -71,7 +83,7 @@ module.exports = {
 							self.onPopupAdHidden();
 					}
 					//
-					if (result == "onAdLinkAdPreloaded") {
+					else if (result == "onAdLinkAdPreloaded") {
 						if (self.onAdLinkAdPreloaded)
 							self.onAdLinkAdPreloaded();
 					}
@@ -119,9 +131,6 @@ module.exports = {
     },
     showBannerAd: function(position, size) {
 		var self = this;	
-		
-		self._isShowingBannerAd = true;
-		
         cordova.exec(
             null,
             null,
@@ -142,9 +151,6 @@ module.exports = {
     },
     hideBannerAd: function() {
 		var self = this;	
-		
-		self._isShowingBannerAd = false;
-		
         cordova.exec(
             null,
             null,
@@ -235,10 +241,12 @@ module.exports = {
 	onFullScreenAdLoaded: null,
 	onFullScreenAdShown: null,
 	onFullScreenAdHidden: null,
+	//
 	onPopupAdPreloaded: null,
 	onPopupAdLoaded: null,
 	onPopupAdShown: null,
 	onPopupAdHidden: null,
+	//
 	onAdLinkAdPreloaded: null,
 	onAdLinkAdLoaded: null,
 	onAdLinkAdShown: null,

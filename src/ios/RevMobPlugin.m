@@ -30,15 +30,16 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 
 - (void) setUp: (CDVInvokedUrlCommand*)command {
     //self.viewController
-	//NSString *adUnit = [command.arguments objectAtIndex: 0];
-	//NSString *adUnitFullScreen = [command.arguments objectAtIndex: 1];
-	//BOOL isOverlap = [[command.arguments objectAtIndex: 2] boolValue];
-	//BOOL isTest = [[command.arguments objectAtIndex: 3] boolValue];
+    //self.webView	
+    //NSString *adUnitBanner = [command.arguments objectAtIndex: 0];
+    //NSString *adUnitFullScreen = [command.arguments objectAtIndex: 1];
+    //BOOL isOverlap = [[command.arguments objectAtIndex: 2] boolValue];
+    //BOOL isTest = [[command.arguments objectAtIndex: 3] boolValue];
 	//NSArray *zoneIds = [command.arguments objectAtIndex:4];	
-	//NSLog(@"%@", adUnit);
-	//NSLog(@"%@", adUnitFullScreen);
-	//NSLog(@"%d", isOverlap);
-	//NSLog(@"%d", isTest);
+    //NSLog(@"%@", adUnitBanner);
+    //NSLog(@"%@", adUnitFullScreen);
+    //NSLog(@"%d", isOverlap);
+    //NSLog(@"%d", isTest);
 	NSString *mediaId = [command.arguments objectAtIndex: 0];
 	NSLog(@"%@", mediaId);
 	BOOL isOverlap = [[command.arguments objectAtIndex: 1] boolValue];
@@ -152,16 +153,25 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 	NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
 	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.revmob: %@", email]];
 	if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
-		NSLog(@"valid licenseKey");
-		validLicenseKey = YES;		
+		self.validLicenseKey = YES;
+		NSArray *excludedLicenseKeys = [NSArray arrayWithObjects: @"995f68522b89ea504577d93232db608c", nil];
+		for (int i = 0 ; i < [excludedLicenseKeys count] ; i++) {
+			if([[excludedLicenseKeys objectAtIndex:i] isEqualToString:licenseKey]) {
+				self.validLicenseKey = NO;
+				break;
+			}
+		}
 	}
 	else {
+		self.validLicenseKey = NO;
+	}
+	if (self.validLicenseKey)
+		NSLog(@"valid licenseKey");
+	else {
 		NSLog(@"invalid licenseKey");
-		validLicenseKey = NO;
-		
 		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Cordova RevMob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		//[alert show];
-	}	
+	}
 }
 
 - (NSString*) md5:(NSString*) input {

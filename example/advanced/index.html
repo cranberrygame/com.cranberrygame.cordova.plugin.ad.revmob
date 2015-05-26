@@ -22,9 +22,6 @@ else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad
 */
 
 document.addEventListener("deviceready", function(){
-	//if no license key, 2% ad traffic share for dev support.
-	//you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
-	//window.revmob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 	
 	window.revmob.setUp(mediaId, isOverlap);
 
@@ -35,6 +32,12 @@ document.addEventListener("deviceready", function(){
 	window.revmob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
+	window.revmob.onBannerAdShown = function() {
+		alert('onBannerAdShown');
+	};
+	window.revmob.onBannerAdHidden = function() {
+		alert('onBannerAdHidden');
+	};	
 	//
 	window.revmob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');

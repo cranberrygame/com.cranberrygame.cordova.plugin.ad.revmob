@@ -180,10 +180,10 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 		//args.getBoolean(0)
 		//args.getBoolean(1)
 		//JSONObject json = args.optJSONObject(0);
-		//json.optString("adUnit")
+		//json.optString("adUnitBanner")
 		//json.optString("adUnitFullScreen")
 		//JSONObject inJson = json.optJSONObject("inJson");
-		//final String adUnit = args.getString(0);
+		//final String adUnitBanner = args.getString(0);
 		//final String adUnitFullScreen = args.getString(1);				
 		//final boolean isOverlap = args.getBoolean(2);				
 		//final boolean isTest = args.getBoolean(3);
@@ -191,10 +191,10 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 		//for (int i = 0; i < args.getJSONArray(4).length(); i++) {
 		//	zoneIds[i] = args.getJSONArray(4).getString(i);
 		//}			
-		//Log.d(LOG_TAG, String.format("%s", adUnit));			
+		//Log.d(LOG_TAG, String.format("%s", adUnitBanner));			
 		//Log.d(LOG_TAG, String.format("%s", adUnitFullScreen));
 		//Log.d(LOG_TAG, String.format("%b", isOverlap));
-		//Log.d(LOG_TAG, String.format("%b", isTest));		
+		//Log.d(LOG_TAG, String.format("%b", isTest));
 		final String mediaId = args.getString(0);
 		final boolean isOverlap = args.getBoolean(1);				
 		Log.d(LOG_TAG, String.format("%s", mediaId));			
@@ -337,15 +337,26 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
 		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.revmob: " + email);
 		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
-			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
 			this.validLicenseKey = true;
+			//
+			String[] excludedLicenseKeys = {"995f68522b89ea504577d93232db608c"};
+			for (int i = 0 ; i < excludedLicenseKeys.length ; i++) {
+				if (excludedLicenseKeys[i].equals(licenseKey)) {
+					this.validLicenseKey = false;
+					break;
+				}
+			}			
+			if (this.validLicenseKey)
+				Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
+			else
+				Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
 		}
 		else {
 			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
 			this.validLicenseKey = false;
-			
-			//Util.alert(plugin.getCordova().getActivity(),"Cordova RevMob: nvalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");			
-		}	
+		}
+		//if (!this.validLicenseKey)
+		//	Util.alert(plugin.getCordova().getActivity(),"Cordova RevMob: nvalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");			
 	}
 	
 	public void _setUp(String mediaId, boolean isOverlap) {

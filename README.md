@@ -85,6 +85,12 @@ document.addEventListener("deviceready", function(){
 	window.revmob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
+	window.revmob.onBannerAdShown = function() {
+		alert('onBannerAdShown');
+	};
+	window.revmob.onBannerAdHidden = function() {
+		alert('onBannerAdHidden');
+	};	
 	//
 	window.revmob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');
@@ -126,7 +132,7 @@ document.addEventListener("deviceready", function(){
 	};	
 }, false);
 
-window.revmob.preloadBannerAd();
+window.revmob.preloadBannerAd();//option, download ad previously for fast show
 /*
 position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
 size: 	'BANNER' (320x50, Phones and Tablets)
@@ -142,13 +148,13 @@ window.revmob.showBannerAd('bottom-center', 'SMART_BANNER');
 window.revmob.reloadBannerAd();
 window.revmob.hideBannerAd();
 
-window.revmob.preloadFullScreenAd();
+window.revmob.preloadFullScreenAd();//option, download ad previously for fast show
 window.revmob.showFullScreenAd();
 
-window.revmob.preloadPopupAd();
+window.revmob.preloadPopupAd();//option, download ad previously for fast show
 window.revmob.showPopupAd();
 
-window.revmob.preloadAdLinkAd();
+window.revmob.preloadAdLinkAd();//option, download ad previously for fast show
 window.revmob.showAdLinkAd();
 
 alert(window.adbuddiz.isShowingBannerAd());//boolean: true or false
