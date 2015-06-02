@@ -1,0 +1,152 @@
+<html>
+<head>
+	<script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+
+<script>
+
+var mediaId = "52091490e2f7a34e4e000024";
+var isOverlap = true; //true: overlap, false: split
+/*
+var mediaId;
+var isOverlap = true; //true: overlap, false: split
+//android
+if (navigator.userAgent.match(/Android/i)) {
+	mediaId = "52091490e2f7a34e4e000024";
+}
+//ios
+else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+	mediaId = "5106be9d0639b41100000052";
+}
+*/
+
+document.addEventListener("deviceready", function(){
+	
+	window.revmob.setUp(mediaId, isOverlap);
+
+	//
+	window.revmob.onBannerAdPreloaded = function() {
+		alert('onBannerAdPreloaded');
+	};
+	window.revmob.onBannerAdLoaded = function() {
+		alert('onBannerAdLoaded');
+	};
+	window.revmob.onBannerAdShown = function() {
+		alert('onBannerAdShown');
+	};
+	window.revmob.onBannerAdHidden = function() {
+		alert('onBannerAdHidden');
+	};	
+	//
+	window.revmob.onFullScreenAdPreloaded = function() {
+		alert('onFullScreenAdPreloaded');
+	};
+	window.revmob.onFullScreenAdLoaded = function() {
+		alert('onFullScreenAdLoaded');
+	};
+	window.revmob.onFullScreenAdShown = function() {
+		alert('onFullScreenAdShown');
+	};
+	window.revmob.onFullScreenAdHidden = function() {
+		alert('onFullScreenAdHidden');
+	};
+	//
+	window.revmob.onVideoAdPreloaded = function() {
+		alert('onVideoAdPreloaded');
+	};
+	window.revmob.onVideoAdLoaded = function() {
+		alert('onVideoAdLoaded');
+	};
+	window.revmob.onVideoAdShown = function() {
+		alert('onVideoAdShown');
+	};
+	window.revmob.onVideoAdHidden = function() {
+		alert('onVideoAdHidden');
+	};	
+	//
+	window.revmob.onRewardedVideoAdPreloaded = function() {
+		alert('onRewardedVideoAdPreloaded');
+	};
+	window.revmob.onRewardedVideoAdLoaded = function() {
+		alert('onRewardedVideoAdLoaded');
+	};
+	window.revmob.onRewardedVideoAdShown = function() {
+		alert('onRewardedVideoAdShown');
+	};
+	window.revmob.onRewardedVideoAdHidden = function() {
+		alert('onRewardedVideoAdHidden');
+	};
+	window.revmob.onRewardedVideoAdCompleted = function() {
+		alert('onRewardedVideoAdCompleted');
+	};	
+	//
+	window.revmob.onPopupAdPreloaded = function() {
+		alert('onPopupAdPreloaded');
+	};
+	window.revmob.onPopupAdLoaded = function() {
+		alert('onPopupAdLoaded');
+	};
+	window.revmob.onPopupAdShown = function() {
+		alert('onPopupAdShown');
+	};
+	window.revmob.onPopupAdHidden = function() {
+		alert('onPopupAdHidden');
+	};
+	//
+	window.revmob.onLinkAdPreloaded = function() {
+		alert('onLinkAdPreloaded');
+	};
+	window.revmob.onLinkAdLoaded = function() {
+		alert('onLinkAdLoaded');
+	};
+	window.revmob.onLinkAdShown = function() {
+		alert('onLinkAdShown');
+	};
+	window.revmob.onLinkAdHidden = function() {
+		alert('onLinkAdHidden');
+	};
+}, false);
+	
+/*
+position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
+*/
+</script>
+
+<p><button onclick="window.revmob.preloadBannerAd();">preloadBannerAd</button></p>
+<p><button onclick="window.revmob.showBannerAd('top-center');">showBannerAd top-center</button></p>
+<p><button onclick="window.revmob.showBannerAd('bottom-center');">showBannerAd bottom-center</button></p>
+<p><button onclick="window.revmob.reloadBannerAd();">reloadBannerAd</button></p>
+<p><button onclick="window.revmob.hideBannerAd();">hideBannerAd</button></p>
+<br>
+<p><button onclick="window.revmob.preloadFullScreenAd();">preloadFullScreenAd</button></p>
+<p><button onclick="window.revmob.showFullScreenAd();">showFullScreenAd</button></p>
+<br>
+<p><button onclick="window.revmob.preloadVideoAd();">preloadVideoAd</button></p>
+<p><button onclick="window.revmob.showVideoAd();">showVideoAd</button></p>
+<br>
+<p><button onclick="window.revmob.preloadRewardedVideoAd();">preloadRewardedVideoAd</button></p>
+<p><button onclick="window.revmob.showRewardedVideoAd();">showRewardedVideoAd</button></p>
+<br>
+<p><button onclick="window.revmob.preloadPopupAd();">preloadPopupAd</button></p>
+<p><button onclick="window.revmob.showPopupAd();">showPopupAd</button></p>
+<br>
+<p><button onclick="window.revmob.preloadLinkAd();">preloadLinkAd</button></p>
+<p><button onclick="window.revmob.showLinkAd();">showLinkAd</button></p>
+<br>
+<p><button onclick="alert(window.revmob.loadedBannerAd());">loadedBannerAd</button></p>
+<p><button onclick="alert(window.revmob.loadedFullScreenAd());">loadedFullScreenAd</button></p>
+<p><button onclick="alert(window.revmob.loadedVideoAd());">loadedVideoAd</button></p>
+<p><button onclick="alert(window.revmob.loadedRewardedVideoAd());">loadedRewardedVideoAd</button></p>
+<p><button onclick="alert(window.revmob.loadedPopupAd());">loadedPopupAd</button></p>
+<p><button onclick="alert(window.revmob.loadedLinkAd());">loadedLinkAd</button></p>
+<br>
+<p><button onclick="alert(window.revmob.isShowingBannerAd());">isShowingBannerAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingFullScreenAd());">isShowingFullScreenAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingVideoAd());">isShowingVideoAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingRewardedVideoAd());">isShowingRewardedVideoAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingPopupAd());">isShowingPopupAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingLinkAd());">isShowingLinkAd</button></p>
+
+</body>
+</html>

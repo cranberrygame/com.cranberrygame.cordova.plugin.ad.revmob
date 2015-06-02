@@ -1,0 +1,132 @@
+<html>
+<head>
+	<script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+
+<script>
+
+var mediaId = "52091490e2f7a34e4e000024";
+var isOverlap = true; //true: overlap, false: split
+/*
+var mediaId;
+var isOverlap = true; //true: overlap, false: split
+//android
+if (navigator.userAgent.match(/Android/i)) {
+	mediaId = "52091490e2f7a34e4e000024";
+}
+//ios
+else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+	mediaId = "5106be9d0639b41100000052";
+}
+*/
+
+document.addEventListener("deviceready", function(){
+	
+	window.revmob.setUp(mediaId, isOverlap);
+
+	//
+	window.revmob.onBannerAdPreloaded = function() {
+		alert('onBannerAdPreloaded');
+	};
+	window.revmob.onBannerAdLoaded = function() {
+		alert('onBannerAdLoaded');
+	};
+	window.revmob.onBannerAdShown = function() {
+		alert('onBannerAdShown');
+	};
+	window.revmob.onBannerAdHidden = function() {
+		alert('onBannerAdHidden');
+	};	
+	//
+	window.revmob.onFullScreenAdPreloaded = function() {
+		alert('onFullScreenAdPreloaded');
+	};
+	window.revmob.onFullScreenAdLoaded = function() {
+		alert('onFullScreenAdLoaded');
+	};
+	window.revmob.onFullScreenAdShown = function() {
+		alert('onFullScreenAdShown');
+	};
+	window.revmob.onFullScreenAdHidden = function() {
+		alert('onFullScreenAdHidden');
+	};
+	//
+	window.revmob.onVideoAdPreloaded = function() {
+		alert('onVideoAdPreloaded');
+	};
+	window.revmob.onVideoAdLoaded = function() {
+		alert('onVideoAdLoaded');
+	};
+	window.revmob.onVideoAdShown = function() {
+		alert('onVideoAdShown');
+	};
+	window.revmob.onVideoAdHidden = function() {
+		alert('onVideoAdHidden');
+	};	
+	//
+	window.revmob.onRewardedVideoAdPreloaded = function() {
+		alert('onRewardedVideoAdPreloaded');
+	};
+	window.revmob.onRewardedVideoAdLoaded = function() {
+		alert('onRewardedVideoAdLoaded');
+	};
+	window.revmob.onRewardedVideoAdShown = function() {
+		alert('onRewardedVideoAdShown');
+	};
+	window.revmob.onRewardedVideoAdHidden = function() {
+		alert('onRewardedVideoAdHidden');
+	};
+	window.revmob.onRewardedVideoAdCompleted = function() {
+		alert('onRewardedVideoAdCompleted');
+	};	
+	//
+	window.revmob.onPopupAdPreloaded = function() {
+		alert('onPopupAdPreloaded');
+	};
+	window.revmob.onPopupAdLoaded = function() {
+		alert('onPopupAdLoaded');
+	};
+	window.revmob.onPopupAdShown = function() {
+		alert('onPopupAdShown');
+	};
+	window.revmob.onPopupAdHidden = function() {
+		alert('onPopupAdHidden');
+	};
+	//
+	window.revmob.onLinkAdPreloaded = function() {
+		alert('onLinkAdPreloaded');
+	};
+	window.revmob.onLinkAdLoaded = function() {
+		alert('onLinkAdLoaded');
+	};
+	window.revmob.onLinkAdShown = function() {
+		alert('onLinkAdShown');
+	};
+	window.revmob.onLinkAdHidden = function() {
+		alert('onLinkAdHidden');
+	};
+}, false);
+	
+/*
+position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
+*/
+</script>
+
+position: <select id="position">
+			<option value='top-left'>top-left</option>
+			<option value='top-center' selected>top-center</option>
+			<option value='top-right'>top-right</option>
+			<option value='left'>left</option>
+			<option value='center'>center</option>
+			<option value='right'>right</option>
+			<option value='bottom-left'>bottom-left</option>
+			<option value='bottom-center'>bottom-center</option>
+			<option value='bottom-right'>bottom-right</option>
+		</select><br>		
+<button onclick="window.revmob.preloadBannerAd();">preloadBannerAd</button><br>		
+<button onclick="window.revmob.showBannerAd(document.getElementById('position').value);">showBannerAd</button><br>
+<button onclick="window.revmob.reloadBannerAd();">reloadBannerAd</button><br>
+<button onclick="window.revmob.hideBannerAd();">hideBannerAd</button>
+</body>
+</html>
