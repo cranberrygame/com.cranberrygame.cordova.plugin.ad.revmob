@@ -274,10 +274,10 @@ public class RevMobPluginOverlap implements PluginDelegate {
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 			bannerViewLayout.setLayoutParams(params);
 			//plugin.getWebView().addView(bannerViewLayout, params);
-			plugin.getWebView().addView(bannerViewLayout);//cordova5 build error
-			//((ViewGroup)plugin.getWebView().getRootView()).addView(bannerViewLayout);//cordova5 build error
-			//((ViewGroup)plugin.getWebView().getView()).addView(bannerViewLayout);//fix cordova5 build error
-			
+			//plugin.getWebView().addView(bannerViewLayout);//only for ~cordova4
+			//((ViewGroup)plugin.getWebView().getRootView()).addView(bannerViewLayout);//only for ~cordova4
+			//((ViewGroup)plugin.getWebView().getView()).addView(bannerViewLayout);//only for cordova5~
+			((ViewGroup)getView(plugin.getWebView())).addView(bannerViewLayout);
 		}
 		
 		//http://tigerwoods.tistory.com/11
@@ -329,6 +329,24 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		//bannerViewLayout.addView(bannerView, params);
 		bannerView.setLayoutParams(params);
 		bannerViewLayout.addView(bannerView);
+	}
+	
+	public static View getView(CordovaWebView webView) {	
+		if(View.class.isAssignableFrom(CordovaWebView.class)) {
+			return (View) webView;
+		}
+		
+		try {
+			Method getViewMethod = CordovaWebView.class.getMethod("getView", (Class<?>[]) null);
+			if(getViewMethod != null) {
+				Object[] args = {};
+				return (View) getViewMethod.invoke(webView, args);
+			}
+		} 
+		catch (Exception e) {
+		}
+		
+		return null;
 	}
 	
 	public void _reloadBannerAd() {
