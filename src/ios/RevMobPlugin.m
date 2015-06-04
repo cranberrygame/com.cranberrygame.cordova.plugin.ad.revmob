@@ -87,9 +87,9 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 }
 
 - (void) preloadFullScreenAd: (CDVInvokedUrlCommand*)command {
-    //[self.commandDelegate runInBackground:^{
+    [self.commandDelegate runInBackground:^{
 		[self _preloadFullScreenAd];
-    //}];
+    }];
 }
 
 - (void) showFullScreenAd: (CDVInvokedUrlCommand*)command {
@@ -99,27 +99,27 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 }
 
 - (void) preloadVideoAd: (CDVInvokedUrlCommand*)command {
-//    [self.commandDelegate runInBackground:^{
-		[self _preloadVideoAd];
-//    }];
+    [self.commandDelegate runInBackground:^{
+        [self _preloadVideoAd];
+    }];
 }
 
 - (void) showVideoAd: (CDVInvokedUrlCommand*)command {
-//    [self.commandDelegate runInBackground:^{
-		[self _showVideoAd];
-//    }];	
+    //[self.commandDelegate runInBackground:^{
+        [self _showVideoAd];
+    //}];
 }
 
 - (void) preloadRewardedVideoAd: (CDVInvokedUrlCommand*)command {
-//    [self.commandDelegate runInBackground:^{
-		[self _preloadRewardedVideoAd];
-//    }];
+    [self.commandDelegate runInBackground:^{
+        [self _preloadRewardedVideoAd];
+    }];
 }
 
 - (void) showRewardedVideoAd: (CDVInvokedUrlCommand*)command {
-//    [self.commandDelegate runInBackground:^{
-		[self _showRewardedVideoAd];
-//    }];	
+    //[self.commandDelegate runInBackground:^{
+        [self _showRewardedVideoAd];
+    //}];
 }
 
 - (void) preloadPopupAd: (CDVInvokedUrlCommand*)command {
@@ -144,6 +144,7 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
     //[self.commandDelegate runInBackground:^{
 		[self _showLinkAd];
     //}];
+}
 
 //cranberrygame start: Plugin
 
@@ -246,19 +247,19 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 }
 
 - (void) _preloadVideoAd {
-	[pluginDelegate _preloadVideoAd];
+    [pluginDelegate _preloadVideoAd];
 }
 
 - (void) _showVideoAd {
-	[pluginDelegate _showVideoAd];
+    [pluginDelegate _showVideoAd];
 }
 
 - (void) _preloadRewardedVideoAd {
-	[pluginDelegate _preloadRewardedVideoAd];
+    [pluginDelegate _preloadRewardedVideoAd];
 }
 
 - (void) _showRewardedVideoAd {
-	[pluginDelegate _showRewardedVideoAd];
+    [pluginDelegate _showRewardedVideoAd];
 }
 
 - (void) _preloadPopupAd {
@@ -276,7 +277,7 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 - (void) _showLinkAd {
 	[pluginDelegate _showLinkAd];
 }
-	
+
 //cranberrygame end: PluginDelegate
 	
 @end

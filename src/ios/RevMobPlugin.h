@@ -56,5 +56,4 @@
 - (void) showPopupAd: (CDVInvokedUrlCommand*)command;
 - (void) preloadLinkAd: (CDVInvokedUrlCommand*)command;
 - (void) showLinkAd: (CDVInvokedUrlCommand*)command;
-
 @end
