@@ -43,6 +43,10 @@ import com.revmob.ads.fullscreen.RevMobFullscreen;
 import com.revmob.ads.link.RevMobLink;
 import com.revmob.ads.popup.RevMobPopup;
 import com.revmob.internal.RMLog;
+//
+import android.annotation.TargetApi;
+//
+import java.lang.reflect.Method;
 
 class Util {
 
@@ -151,15 +155,15 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		handleLayoutChangeOverlap();
 	}
 	
-	//@SuppressLint("NewApi")
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	protected void handleLayoutChangeOverlap() {
 		//http://stackoverflow.com/questions/24539578/cordova-plugin-listening-to-device-orientation-change-is-it-possible
 		//http://developer.android.com/reference/android/view/View.OnLayoutChangeListener.html
 		//https://gitshell.com/lvxudong/A530_packages_app_Camera/blob/master/src/com/android/camera/ActivityBase.java
-    	plugin.getWebView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//cordova5 build error
-		//plugin.getWebView().getRootView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//cordova5 build error
-		//plugin.getWebView().getView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//fix cordova5 build error		
+        //plugin.getWebView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//only for ~cordova4
+        //plugin.getWebView().getRootView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//only for ~cordova4
+        //plugin.getWebView().getView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//only for cordova5~
+        getView(plugin.getWebView()).addOnLayoutChangeListener(new View.OnLayoutChangeListener(){
 		    @Override
 	        public void onLayoutChange(View v, int left, int top, int right, int bottom,
 	                int oldLeft, int oldTop, int oldRight, int oldBottom) {
