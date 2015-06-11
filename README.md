@@ -24,9 +24,9 @@ To-Do:
 # Install plugin #
 
 ## Cordova cli ##
-https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@4.1.2
+https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@5.0.0
 ```c
-cordova plugin add com.cranberrygame.cordova.plugin.ad.revmob
+cordova plugin add cordova-plugin-ad-revmob
 ```
 
 ## Xdk ##
@@ -43,7 +43,7 @@ https://cocoon.io - Create project - [specific project] - Setting - Plugins - Cu
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
 ```c
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.revmob" source="plugins.cordova.io" />
+<gap:plugin name="cordova-plugin-ad-revmob" source="npm" />
 ```
 
 ## Construct2 ##
