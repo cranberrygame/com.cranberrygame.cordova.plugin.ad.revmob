@@ -3,12 +3,12 @@ Cordova RevMob plugin
 # Overview #
 Show revmob popup, link, banner, full screen (including accepts video option) ad
 
-[android, ios] [cordova cli] [xdk]
+[android, ios] [cordova cli] [xdk] [cocoon]
 
 Requires revmob account https://www.revmobmobileadnetwork.com
 
-revmob-android-sdk-9.0.0
-revmob-ios-sdk-9.0.0
+revmob-android-sdk-9.0.1 (2015/05/28)<br>
+revmob-ios-sdk-9.0.1 (2015/05/28)
 
 This is open source cordova plugin.
 
@@ -16,7 +16,8 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 
 # Change log #
 ```c
-	
+Updated sdk version to 9.0.1
+
 To-Do:
 
 	supports ios banner
@@ -53,6 +54,15 @@ Now all the native plugins are installed automatically: https://plus.google.com/
 # Server setting #
 ```c
 ```
+
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-revmob/master/doc/RewardedVideo1.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-revmob/master/doc/RewardedVideo2.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-revmob/master/doc/RewardedVideo3.png">
+
+test mode setting:<br>
+https://www.revmobmobileadnetwork.com - Monetization - [specific app] - Edit Media - Testing Mode: select one among Off, With Ads and Without Ads 
+
+Full screen ad video option: https://www.revmobmobileadnetwork.com - Monetization - [specific app] - Ad Units - Fullscreen - Edit - check Accepts Video or not
 
 # API #
 ```javascript
@@ -105,32 +115,6 @@ document.addEventListener("deviceready", function(){
 		alert('onFullScreenAdHidden');
 	};
 	//
-	window.revmob.onPopupAdPreloaded = function() {
-		alert('onPopupAdPreloaded');
-	};
-	window.revmob.onPopupAdLoaded = function() {
-		alert('onPopupAdLoaded');
-	};
-	window.revmob.onPopupAdShown = function() {
-		alert('onPopupAdShown');
-	};
-	window.revmob.onPopupAdHidden = function() {
-		alert('onPopupAdHidden');
-	};
-	//
-	window.revmob.onLinkAdPreloaded = function() {
-		alert('onLinkAdPreloaded');
-	};
-	window.revmob.onLinkAdLoaded = function() {
-		alert('onLinkAdLoaded');
-	};
-	window.revmob.onLinkAdShown = function() {
-		alert('onLinkAdShown');
-	};
-	window.revmob.onLinkAdHidden = function() {
-		alert('onLinkAdHidden');
-	};
-	//
 	window.revmob.onVideoAdPreloaded = function() {
 		alert('onVideoAdPreloaded');
 	};
@@ -158,27 +142,52 @@ document.addEventListener("deviceready", function(){
 	};
 	window.revmob.onRewardedVideoAdCompleted = function() {
 		alert('onRewardedVideoAdCompleted');
+	};	
+	//
+	window.revmob.onPopupAdPreloaded = function() {
+		alert('onPopupAdPreloaded');
+	};
+	window.revmob.onPopupAdLoaded = function() {
+		alert('onPopupAdLoaded');
+	};
+	window.revmob.onPopupAdShown = function() {
+		alert('onPopupAdShown');
+	};
+	window.revmob.onPopupAdHidden = function() {//not implemented yet
+		alert('onPopupAdHidden');
+	};
+	//
+	window.revmob.onLinkAdPreloaded = function() {
+		alert('onLinkAdPreloaded');
+	};
+	window.revmob.onLinkAdLoaded = function() {
+		alert('onLinkAdLoaded');
+	};
+	window.revmob.onLinkAdShown = function() {
+		alert('onLinkAdShown');
+	};
+	window.revmob.onLinkAdHidden = function() {//not implemented yet
+		alert('onLinkAdHidden');
 	};
 }, false);
 
 window.revmob.preloadBannerAd();//option, download ad previously for fast show
 /*
 position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
-size: 	'BANNER' (320x50, Phones and Tablets)
-		'LARGE_BANNER' (320x100, Phones and Tablets)
-		'MEDIUM_RECTANGLE' (300x250, Phones and Tablets)
-		'FULL_BANNER' (468x60, Tablets)
-		'LEADERBOARD' (728x90, Tablets)
-		'SKYSCRAPER' (120x600, Tablets, ipad only)
-		'SMART_BANNER' (Auto size, Phones and Tablets, recommended)
 */
-window.revmob.showBannerAd('top-center', 'SMART_BANNER');
-window.revmob.showBannerAd('bottom-center', 'SMART_BANNER');
+window.revmob.showBannerAd('top-center');
+window.revmob.showBannerAd('bottom-center');
 window.revmob.reloadBannerAd();
 window.revmob.hideBannerAd();
 
 window.revmob.preloadFullScreenAd();//option, download ad previously for fast show
 window.revmob.showFullScreenAd();
+
+window.revmob.preloadVideoAd();//option, download ad previously for fast show
+window.revmob.showVideoAd();
+
+window.revmob.preloadRewardedVideoAd();//option, download ad previously for fast show
+window.revmob.showRewardedVideoAd();
 
 window.revmob.preloadPopupAd();//option, download ad previously for fast show
 window.revmob.showPopupAd();
@@ -186,25 +195,19 @@ window.revmob.showPopupAd();
 window.revmob.preloadLinkAd();//option, download ad previously for fast show
 window.revmob.showLinkAd();
 
-window.revmob.preloadVideoAd();
-window.revmob.showVideoAd();
-
-window.revmob.preloadRewardedVideoAd();
-window.revmob.showRewardedVideoAd();
-
 alert(window.revmob.loadedBannerAd());//boolean: true or false
 alert(window.revmob.loadedFullScreenAd());//boolean: true or false
-alert(window.revmob.loadedPopupAd());//boolean: true or false
-alert(window.revmob.loadedLinkAd());//boolean: true or false
 alert(window.revmob.loadedVideoAd());//boolean: true or false
 alert(window.revmob.loadedRewardedVideoAd());//boolean: true or false
+alert(window.revmob.loadedPopupAd());//boolean: true or false
+alert(window.revmob.loadedLinkAd());//boolean: true or false
 
 alert(window.revmob.isShowingBannerAd());//boolean: true or false
 alert(window.revmob.isShowingFullScreenAd());//boolean: true or false
-alert(window.revmob.isShowingPopupAd());//boolean: true or false
-alert(window.revmob.isShowingLinkAd());//boolean: true or false
 alert(window.revmob.isShowingVideoAd());//boolean: true or false
 alert(window.revmob.isShowingRewardedVideoAd());//boolean: true or false
+alert(window.revmob.isShowingPopupAd());//boolean: true or false
+alert(window.revmob.isShowingLinkAd());//boolean: true or false
 ```
 # Examples #
 <a href="https://github.com/cranberrygame/cordova-plugin-ad-revmob/blob/master/example/basic/index.html">example/basic/index.html</a><br>

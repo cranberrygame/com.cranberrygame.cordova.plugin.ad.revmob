@@ -1,0 +1,38 @@
+{
+  "name": "cordova-plugin-ad-revmob",
+  "version": "1.0.55",
+  "description": "Show revmob banner, full screen, video, rewarded video, popup, link ad.",
+  "cordova": {
+    "id": "cordova-plugin-ad-revmob",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cranberrygame/cordova-plugin-ad-revmob.git"
+  },
+  "keywords": [
+    "cordova",
+    "plugin",
+    "ad",
+    "revmob",
+    "monetisation",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "cranberrygame",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cranberrygame/cordova-plugin-ad-revmob/issues"
+  },
+  "homepage": "https://github.com/cranberrygame/cordova-plugin-ad-revmob#readme"
+}

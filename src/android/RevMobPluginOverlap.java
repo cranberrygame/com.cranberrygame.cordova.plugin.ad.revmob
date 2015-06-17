@@ -235,7 +235,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		}
 		else {			
 			bannerView.hide(true); //option: refresh
-		}		
+		}
 	}
 	
 	public void _showBannerAd(String position, String size) {
@@ -249,6 +249,13 @@ public class RevMobPluginOverlap implements PluginDelegate {
 
 		if(bannerAdPreload) {
 			bannerAdPreload = false;
+			
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
+			pr.setKeepCallback(true);
+			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.setKeepCallback(true);
+			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);				
 		}
 		else{
 			_hideBannerAd();
@@ -506,6 +513,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
     }	
 	
 	class BannerAdRevMobAdsListener extends RevMobAdsListener {
+		
 		@Override
 		public void onRevMobSessionIsStarted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobSessionIsStarted"));
@@ -581,6 +589,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	};
 		
 	class FullScreenAdRevMobAdsListener extends RevMobAdsListener {
+		
 		@Override
 		public void onRevMobSessionIsStarted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobSessionIsStarted"));
@@ -667,6 +676,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	};	
 
 	class VideoAdRevMobAdsListener extends RevMobAdsListener {
+		
 		@Override
 		public void onRevMobSessionIsStarted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobSessionIsStarted"));
@@ -680,26 +690,6 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdReceived() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdReceived"));
-	
-    		if(rewardedVideoAdPreload) {
-    			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onVideoAdPreloaded");
-    			pr.setKeepCallback(true);
-    			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-    			//pr.setKeepCallback(true);
-    			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    		}
-    		
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onVideoAdLoaded");
-    		pr.setKeepCallback(true);
-    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-    		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);		
-    		
-    		if(!videoAdPreload) {
-				video.showVideo();
-    		}    		
 		}
 
 		@Override
@@ -710,13 +700,6 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdDisplayed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDisplayed"));
-			
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onVideoAdShown");
-    		pr.setKeepCallback(true);
-    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-    		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
 		}
 
 		@Override
@@ -751,10 +734,30 @@ public class RevMobPluginOverlap implements PluginDelegate {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobEulaWasRejected"));
 		}
 		
-		//------------------------------
+		//video ad callback
 		@Override
 		public void onRevMobVideoLoaded(){
 			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoLoaded"));
+			
+    		if(videoAdPreload) {
+    			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onVideoAdPreloaded");
+    			pr.setKeepCallback(true);
+    			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+    			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+    			//pr.setKeepCallback(true);
+    			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+    		}
+    		
+    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onVideoAdLoaded");
+    		pr.setKeepCallback(true);
+    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+    		//pr.setKeepCallback(true);
+    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);		
+    		
+    		if(!videoAdPreload) {
+				video.showVideo();
+    		}	
 		}		
 
 		@Override
@@ -765,6 +768,13 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobVideoStarted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoStarted"));
+			
+    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onVideoAdShown");
+    		pr.setKeepCallback(true);
+    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+    		//pr.setKeepCallback(true);
+    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
 		}
 		
 		@Override
@@ -772,7 +782,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoFinished"));
 		}
 		
-		//------------------------------
+		//rewarded video ad callback
 		@Override
 		public void onRevMobRewardedVideoLoaded() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobRewardedVideoLoaded"));
@@ -801,17 +811,11 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobRewardedVideoCompleted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobRewardedVideoCompleted"));
-			
-			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdCompleted");
-			pr.setKeepCallback(true);
-			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-			//pr.setKeepCallback(true);
-			//callbackContextKeepCallback.sendPluginResult(pr);			
 		}		
 	};
 
 	class RewardedVideoAdRevMobAdsListener extends RevMobAdsListener {
+		
 		@Override
 		public void onRevMobSessionIsStarted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobSessionIsStarted"));
@@ -825,7 +829,69 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdReceived() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdReceived"));
-	
+		}
+
+		@Override
+		public void onRevMobAdNotReceived(String message) {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobAdNotReceived"));
+		}
+
+		@Override
+		public void onRevMobAdDisplayed() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDisplayed"));
+		}
+
+		@Override
+		public void onRevMobAdClicked() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobAdClicked"));
+		}
+
+		@Override
+		public void onRevMobAdDismissed() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismissed"));
+		}
+		
+		@Override
+		public void onRevMobEulaIsShown() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobEulaIsShown"));
+		}
+
+		@Override
+		public void onRevMobEulaWasAcceptedAndDismissed() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobEulaWasAcceptedAndDismissed"));
+		}
+
+		@Override
+		public void onRevMobEulaWasRejected() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobEulaWasRejected"));
+		}
+		
+		//video ad callback
+		@Override
+		public void onRevMobVideoLoaded(){
+			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoLoaded"));
+		}		
+
+		@Override
+		public void onRevMobVideoNotCompletelyLoaded() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoNotCompletelyLoaded"));
+		}
+		
+		@Override
+		public void onRevMobVideoStarted() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoStarted"));
+		}
+		
+		@Override
+		public void onRevMobVideoFinished(){
+			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoFinished"));
+		}
+		
+		//rewarded video ad callback
+		@Override
+		public void onRevMobRewardedVideoLoaded() {
+			Log.d(LOG_TAG, String.format("%s", "onRevMobRewardedVideoLoaded"));
+			
     		if(rewardedVideoAdPreload) {
     			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdPreloaded");
     			pr.setKeepCallback(true);
@@ -844,83 +910,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
     		
     		if(!rewardedVideoAdPreload) {
 				rewardedVideo.showRewardedVideo();
-    		}    		
-		}
-
-		@Override
-		public void onRevMobAdNotReceived(String message) {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobAdNotReceived"));
-		}
-
-		@Override
-		public void onRevMobAdDisplayed() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDisplayed"));
-			
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdShown");
-    		pr.setKeepCallback(true);
-    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-    		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
-		}
-
-		@Override
-		public void onRevMobAdClicked() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobAdClicked"));
-		}
-
-		@Override
-		public void onRevMobAdDismissed() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismissed"));
-			
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdHidden");
-    		pr.setKeepCallback(true);
-    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-    		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
-		}
-		
-		@Override
-		public void onRevMobEulaIsShown() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobEulaIsShown"));
-		}
-
-		@Override
-		public void onRevMobEulaWasAcceptedAndDismissed() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobEulaWasAcceptedAndDismissed"));
-		}
-
-		@Override
-		public void onRevMobEulaWasRejected() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobEulaWasRejected"));
-		}
-		
-		//------------------------------
-		@Override
-		public void onRevMobVideoLoaded(){
-			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoLoaded"));
-		}		
-
-		@Override
-		public void onRevMobVideoNotCompletelyLoaded() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoNotCompletelyLoaded"));
-		}
-		
-		@Override
-		public void onRevMobVideoStarted() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoStarted"));
-		}
-		
-		@Override
-		public void onRevMobVideoFinished(){
-			Log.d(LOG_TAG, String.format("%s", "onRevMobVideoFinished"));
-		}
-		
-		//------------------------------
-		@Override
-		public void onRevMobRewardedVideoLoaded() {
-			Log.d(LOG_TAG, String.format("%s", "onRevMobRewardedVideoLoaded"));
+    		}
 		}
 		
 		@Override
@@ -936,11 +926,25 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobRewardedVideoStarted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobRewardedVideoStarted"));
+			
+    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdShown");
+    		pr.setKeepCallback(true);
+    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+    		//pr.setKeepCallback(true);
+    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
 		}
 		
 		@Override
 		public void onRevMobRewardedVideoFinished() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobRewardedVideoFinished"));
+			
+    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdHidden");
+    		pr.setKeepCallback(true);
+    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+    		//pr.setKeepCallback(true);
+    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
 		}
 		
 		@Override
@@ -957,6 +961,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	};
 	
 	class PopupAdRevMobAdsListener extends RevMobAdsListener {
+		
 		@Override
 		public void onRevMobSessionIsStarted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobSessionIsStarted"));
@@ -1017,13 +1022,16 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdDismissed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismissed"));
-			
+		
+/*			
+			//not triggerred			
     		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onPopupAdHidden");
     		pr.setKeepCallback(true);
     		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
     		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
+    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+*/
 		}
 		
 		@Override
@@ -1043,6 +1051,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	};
 	
 	class LinkAdRevMobAdsListener extends RevMobAdsListener {
+		
 		@Override
 		public void onRevMobSessionIsStarted() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobSessionIsStarted"));
@@ -1103,13 +1112,15 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdDismissed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismissed"));
-			
+/*			
+			//not triggerred
     		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onLinkAdHidden");
     		pr.setKeepCallback(true);
     		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
     		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
+    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+*/
 		}
 		
 		@Override
