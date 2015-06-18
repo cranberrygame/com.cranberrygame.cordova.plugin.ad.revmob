@@ -849,6 +849,16 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdDismissed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismissed"));
+            
+/*			
+			//not triggered
+    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdHidden");
+    		pr.setKeepCallback(true);
+    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+    		//pr.setKeepCallback(true);
+    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+*/			
 		}
 		
 		@Override
@@ -938,13 +948,6 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobRewardedVideoFinished() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobRewardedVideoFinished"));
-			
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdHidden");
-    		pr.setKeepCallback(true);
-    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-    		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
 		}
 		
 		@Override
@@ -1005,13 +1008,14 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdDisplayed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDisplayed"));
-			
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onPopupAdShown");
-    		pr.setKeepCallback(true);
-    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-    		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
+
+			//android: triggered, ios: not triggered
+            PluginResult pr = new PluginResult(PluginResult.Status.OK, "onPopupAdShown");
+            pr.setKeepCallback(true);
+            plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+            //PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+            //pr.setKeepCallback(true);
+            //plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
 		}
 
 		@Override
@@ -1023,15 +1027,13 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		public void onRevMobAdDismissed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismissed"));
 		
-/*			
-			//not triggerred			
+			//android: not triggered, ios: triggered
     		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onPopupAdHidden");
     		pr.setKeepCallback(true);
     		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
     		//pr.setKeepCallback(true);
     		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-*/
 		}
 		
 		@Override
@@ -1095,32 +1097,31 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		@Override
 		public void onRevMobAdDisplayed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDisplayed"));
-			
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onLinkAdShown");
-    		pr.setKeepCallback(true);
-    		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-    		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-    		//pr.setKeepCallback(true);
-    		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
 		}
 
 		@Override
 		public void onRevMobAdClicked() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdClicked"));
+            
+            PluginResult pr = new PluginResult(PluginResult.Status.OK, "onLinkAdShown");
+            pr.setKeepCallback(true);
+            plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+            //PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+            //pr.setKeepCallback(true);
+            //plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
 		}
 
 		@Override
 		public void onRevMobAdDismissed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismissed"));
-/*			
-			//not triggerred
+		
+			//android: not triggered, ios: not triggered
     		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onLinkAdHidden");
     		pr.setKeepCallback(true);
     		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
     		//pr.setKeepCallback(true);
     		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-*/
 		}
 		
 		@Override

@@ -6,7 +6,6 @@
 //
 #import <RevMobAds/RevMobAds.h>
 
-////@interface RevMobPluginOverlap : NSObject <PluginDelegate, RevMobAdsDelegate>
 @interface RevMobPluginOverlap : NSObject <PluginDelegate>
 
 @property id<Plugin> plugin;
@@ -32,6 +31,13 @@
 @property RevMobFullscreen *rewardedVideo;
 @property RevMobPopup *popup;
 @property RevMobAdLink *link;
+//
+@property id bannerAdRevMobAdsDelegate;
+@property id fullScreenAdRevMobAdsDelegate;
+@property id videoAdRevMobAdsDelegate;
+@property id rewardedVideoAdRevMobAdsDelegate;
+@property id popupAdRevMobAdsDelegate;
+@property id linkAdRevMobAdsDelegate;
 
 - (id) initWithPlugin:(id<Plugin>)plugin_;
 
@@ -47,22 +53,22 @@
 - (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
 @end
 
-@interface PopupAdRevMobAdsDelegate : NSObject <RevMobAdsDelegate>
-@property RevMobPluginOverlap *revMobPluginOverlap;
-- (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
-@end
-
-@interface LinkAdRevMobAdsDelegate : NSObject <RevMobAdsDelegate>
-@property RevMobPluginOverlap *revMobPluginOverlap;
-- (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
-@end
-
 @interface VideoAdRevMobAdsDelegate : NSObject <RevMobAdsDelegate>
 @property RevMobPluginOverlap *revMobPluginOverlap;
 - (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
 @end
 
 @interface RewardedVideoAdRevMobAdsDelegate : NSObject <RevMobAdsDelegate>
+@property RevMobPluginOverlap *revMobPluginOverlap;
+- (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
+@end
+
+@interface PopupAdRevMobAdsDelegate : NSObject <RevMobAdsDelegate>
+@property RevMobPluginOverlap *revMobPluginOverlap;
+- (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
+@end
+
+@interface LinkAdRevMobAdsDelegate : NSObject <RevMobAdsDelegate>
 @property RevMobPluginOverlap *revMobPluginOverlap;
 - (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
 @end

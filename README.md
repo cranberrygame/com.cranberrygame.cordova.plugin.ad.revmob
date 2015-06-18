@@ -173,9 +173,10 @@ document.addEventListener("deviceready", function(){
 
 window.revmob.preloadBannerAd();//option, download ad previously for fast show
 /*
-position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
+//position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
+position: 'bottom-center' //only 'bottom-center' is supported
 */
-window.revmob.showBannerAd('top-center');
+//window.revmob.showBannerAd('top-center');
 window.revmob.showBannerAd('bottom-center');
 window.revmob.reloadBannerAd();
 window.revmob.hideBannerAd();

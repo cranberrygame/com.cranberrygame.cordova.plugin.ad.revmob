@@ -29,6 +29,13 @@
 @synthesize link;
 @synthesize video;
 @synthesize rewardedVideo;
+//
+@synthesize bannerAdRevMobAdsDelegate;
+@synthesize fullScreenAdRevMobAdsDelegate;
+@synthesize videoAdRevMobAdsDelegate;
+@synthesize rewardedVideoAdRevMobAdsDelegate;
+@synthesize popupAdRevMobAdsDelegate;
+@synthesize linkAdRevMobAdsDelegate;
 
 /*
 - (CDVPlugin *) initWithWebView:(UIWebView *)theWebView {
@@ -109,9 +116,12 @@
     //
     if (bannerView == nil) {
         self.bannerView = [[RevMobAds session] bannerView];
-        self.bannerView.delegate = [[BannerAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+        //self.bannerView.delegate = [[BannerAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];//runtime error
+        self.bannerAdRevMobAdsDelegate = [[BannerAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+        self.bannerView.delegate = self.bannerAdRevMobAdsDelegate;
 	}
-    [self.bannerView loadAd];
+    
+    [self.bannerView loadAd]; 
 }
 	
 - (void) _showBannerAd:(NSString *)position aSize:(NSString *)size {
@@ -125,13 +135,6 @@
 
 	if(bannerAdPreload) {
 		bannerAdPreload = NO;
-		
-		CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdShown"];
-		[pr setKeepCallbackAsBool:YES];
-		[[plugin getCommandDelegate] sendPluginResult:pr callbackId:[plugin getCallbackIdKeepCallback]];
-		//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-		//[pr setKeepCallbackAsBool:YES];
-		//[[plugin getCommandDelegate] sendPluginResult:pr callbackId:[plugin getCallbackIdKeepCallback]];
 	}
 	else{
 		[self _hideBannerAd];
@@ -139,7 +142,16 @@
 		[self loadBannerAd];
 	}
 			
-	[self addBannerViewOverlap:position aSize:size];	
+	[self addBannerViewOverlap:position aSize:size];
+    
+/*
+     CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdShown"];
+     [pr setKeepCallbackAsBool:YES];
+     [[plugin getCommandDelegate] sendPluginResult:pr callbackId:[plugin getCallbackIdKeepCallback]];
+     //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+     //[pr setKeepCallbackAsBool:YES];
+     //[[plugin getCommandDelegate] sendPluginResult:pr callbackId:[plugin getCallbackIdKeepCallback]];
+*/
 }
 
 - (BOOL) bannerIsShowingOverlap {
@@ -161,9 +173,8 @@
 /*
     [bannerView setFrame:CGRectMake(10, 692, 200, 40)];
     [[self.plugin getWebView] addSubview:bannerView];
-	self.bannerView = nil;
 */
-///*
+/*
 	CGRect bannerFrame = bannerView.frame;
 	if ([position isEqualToString:@"top-center"]) {		    
 		bannerFrame.origin.y = 0;
@@ -175,16 +186,30 @@
 	bannerView.frame = bannerFrame;
 	//https://developer.apple.com/library/ios/documentation/uikit/reference/UIView_Class/UIView/UIView.html#//apple_ref/occ/cl/UIView
 	[[self.plugin getWebView] addSubview:bannerView];//////
-//*/
+*/
+/*
+     CGFloat width = [self.plugin getWebView].bounds.size.width;
+     CGFloat height = [self.plugin getWebView].bounds.size.height;
+     if ([position isEqualToString:@"top-center"]) {
+        bannerView.frame = CGRectMake(0, 0, width, 50);
+     }
+     else {
+        bannerView.frame = CGRectMake(0, height - 50, width, 50);
+     }
+     //bannerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+     [[self.plugin getWebView] addSubview:bannerView];
+*/
+    //revmob: only support revmobAdDisplayed delegate
+    [self.bannerView showAd];
 }
-	
+ 
 - (void) _reloadBannerAd {
     [self loadBannerAd];
 }
 
 - (void) _hideBannerAd {
 	[self _removeBannerViewOverlap];
-	
+
     CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdHidden"];
 	[pr setKeepCallbackAsBool:YES];
 	[[plugin getCommandDelegate] sendPluginResult:pr callbackId:[plugin getCallbackIdKeepCallback]];
@@ -214,7 +239,9 @@
 
 - (void) loadFullScreenAd {
     self.interstitialView = [[RevMobAds session] fullscreen];
-    self.interstitialView.delegate = [[FullScreenAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+    //self.interstitialView.delegate = [[FullScreenAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];//runtime error
+    self.fullScreenAdRevMobAdsDelegate = [[FullScreenAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+    self.interstitialView.delegate = self.fullScreenAdRevMobAdsDelegate;
     
 	[self.interstitialView loadAd];
 }
@@ -230,6 +257,58 @@
 	}
 }
 
+- (void) _preloadVideoAd {
+    videoAdPreload = YES;
+    
+    [self loadVideoAd];
+}
+
+- (void) loadVideoAd {
+    self.video = [[RevMobAds session] fullscreen];
+    //self.video.delegate = [[VideoAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];//runtime error
+    self.videoAdRevMobAdsDelegate = [[VideoAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+    self.video.delegate = self.videoAdRevMobAdsDelegate;
+    
+    [self.video loadVideo];
+}
+
+- (void) _showVideoAd {
+    if(videoAdPreload) {
+        videoAdPreload = NO;
+        
+        [self.video showVideo];
+    }
+    else {
+        [self loadVideoAd];
+    }
+}
+
+- (void) _preloadRewardedVideoAd {
+    rewardedVideoAdPreload = YES;
+    
+    [self loadRewardedVideoAd];
+}
+
+- (void) loadRewardedVideoAd {
+    self.rewardedVideo = [[RevMobAds session] fullscreen];
+    //self.rewardedVideo.delegate = [[RewardedVideoAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];//runtime error
+    self.rewardedVideoAdRevMobAdsDelegate = [[RewardedVideoAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+    self.rewardedVideo.delegate = self.rewardedVideoAdRevMobAdsDelegate;
+    
+    [self.rewardedVideo loadRewardedVideo];
+}
+
+- (void) _showRewardedVideoAd {
+    if(rewardedVideoAdPreload) {
+        rewardedVideoAdPreload = NO;
+        
+        [self.rewardedVideo showRewardedVideo];
+    }
+    else {
+        [self loadRewardedVideoAd];
+    }
+}
+
 - (void) _preloadPopupAd {
 	popupAdPreload = YES;
 
@@ -238,7 +317,9 @@
 
 - (void) loadPopupAd {
     self.popup = [[RevMobAds session] popup];
-    self.popup.delegate = [[PopupAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+    //self.popup.delegate = [[PopupAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];//runtime error
+    self.popupAdRevMobAdsDelegate = [[PopupAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+    self.popup.delegate = self.popupAdRevMobAdsDelegate;
     
     [self.popup loadAd];
 }
@@ -263,42 +344,11 @@
 - (void) loadLinkAd {
 
     self.link = [[RevMobAds session] adLink];
-    RevMobPluginOverlap* self_ = self;
-
-    [self.link loadWithSuccessHandler:^(RevMobAdLink *link) {
-        NSLog(@"loadWithSuccessHandler");
-        
-        if(linkAdPreload) {
-            CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onLinkAdPreloaded"];
-            [pr setKeepCallbackAsBool:YES];
-            [[self_.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self_.plugin getCallbackIdKeepCallback]];
-          
-            //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-            //[pr setKeepCallbackAsBool:YES];
-            //[[self_.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self_.plugin getCallbackIdKeepCallback]];
-        }
-
-        CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onLinkAdLoaded"];
-        [pr setKeepCallbackAsBool:YES];
-        [[self_.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self_.plugin getCallbackIdKeepCallback]];
-        //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-        //[pr setKeepCallbackAsBool:YES];
-        //[[self_.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self_.plugin getCallbackIdKeepCallback]];
-        
-        if(!linkAdPreload) {
-            [link openLink];
-        }
-    } andLoadFailHandler:^(RevMobAdLink *link, NSError *error) {
-        NSLog(@"andLoadFailHandler");
-    }];
-
-/*
-    self.link = [[RevMobAds session] adLink];
-    self.linkDelegate = [[LinkAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
-    self.link.delegate = linkDelegate;
+    //self.link.delegate = [[LinkAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];//runtime error
+    self.linkAdRevMobAdsDelegate = [[LinkAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+    self.link.delegate = self.linkAdRevMobAdsDelegate;
  
-    [self.popup loadAd];
-*/
+    [self.link loadAd];
 }
 
 - (void) _showLinkAd {
@@ -311,97 +361,6 @@
 		[self loadLinkAd];
 	}		
 }
-
-- (void) _preloadVideoAd {
-	videoAdPreload = YES;
-
-	[self loadVideoAd];
-}
-
-- (void) loadVideoAd {
-    self.video = [[RevMobAds session] fullscreen];
-    self.video.delegate = [[VideoAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
-    
-	[self.video loadVideo];
-}
-
-- (void) _showVideoAd {
-	if(videoAdPreload) {
-		videoAdPreload = NO;
-
-		[self.video showVideo];
-	}
-	else {
-		[self loadVideoAd];
-	}
-}
-
-- (void) _preloadRewardedVideoAd {
-	rewardedVideoAdPreload = YES;
-
-	[self loadRewardedVideoAd];
-}
-
-- (void) loadRewardedVideoAd {
-    self.rewardedVideo = [[RevMobAds session] fullscreen];
-    self.rewardedVideo.delegate = [[RewardedVideoAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
-    
-	[self.rewardedVideo loadRewardedVideo];
-}
-
-- (void) _showRewardedVideoAd {
-	if(rewardedVideoAdPreload) {
-		rewardedVideoAdPreload = NO;
-
-		[self.rewardedVideo showRewardedVideo];
-	}
-	else {
-		[self loadRewardedVideoAd];
-	}
-}
-
-//cranberrygame start: RevMobAdsDelegate
-/*
-- (void) revmobSessionIsStarted {
-    NSLog(@"revmobSessionIsStarted");
-}
-
-- (void) revmobSessionNotStarted:(NSError *)error {
-    NSLog(@"revmobSessionNotStarted");
-}
-
-- (void) revmobAdDidReceive {
-    NSLog(@"revmobAdDidReceive");
-
-}
-
-- (void) revmobAdDidFailWithError:(NSError *)error {
-    NSLog(@"revmobAdDidFailWithError");
-}
-
-- (void) revmobAdDisplayed {
-    NSLog(@"revmobAdDisplayed");
-
-}
-
-- (void) revmobUserClickedInTheAd {
-    NSLog(@"revmobUserClickedInTheAd");
-}
-
-- (void) revmobUserClosedTheAd {
-    NSLog(@"revmobUserClosedTheAd");
-
-}
-
-- (void) installDidReceive {
-    NSLog(@"installDidReceive");
-}
-
-- (void) installDidFail {
-    NSLog(@"installDidFail");
-}
-*/
-//cranberrygame end: RevMobAdsDelegate
 
 @end
 
@@ -647,7 +606,7 @@
 }
 
 -(void)revmobVideoDidStart{
-    NSLog(@"[RevMob Sample App] Video started.");
+    NSLog(@"revmobVideoDidStart");
 	
     CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onVideoAdShown"];
     [pr setKeepCallbackAsBool:YES];
@@ -658,32 +617,32 @@
 }
 
 -(void)revmobVideoDidFinish{
-    NSLog(@"[RevMob Sample App] Video started.");
+    NSLog(@"revmobVideoDidFinish");
 }
 
 //rewarded video ad callback
 -(void)revmobRewardedVideoDidLoad{
-    NSLog(@"[RevMob Sample App] Rewarded Video loaded.");
+    NSLog(@"revmobRewardedVideoDidLoad");
 }
 
 -(void)revmobRewardedVideoNotCompletelyLoaded{
-    NSLog(@"[RevMob Sample App] Rewarded Video not completely loaded.");
+    NSLog(@"revmobRewardedVideoNotCompletelyLoaded");
 }
 
 -(void)revmobRewardedPreRollDisplayed{
-    NSLog(@"[RevMob Sample App] Rewarded Pre Roll displayed.");
+    NSLog(@"revmobRewardedPreRollDisplayed");
 }
 
 -(void)revmobRewardedVideoDidStart{
-    NSLog(@"[RevMob Sample App] Rewarded Video started.");
+    NSLog(@"revmobRewardedVideoDidStart");
 }
 
 -(void)revmobRewardedVideoDidFinish{
-    NSLog(@"[RevMob Sample App] Rewarded Video finished.");
+    NSLog(@"revmobRewardedVideoDidFinish");
 }
 
 -(void)revmobRewardedVideoComplete {
-    NSLog(@"[RevMob Sample App] Rewarded Video completed.");
+    NSLog(@"revmobRewardedVideoComplete");
 }
 
 @end
@@ -726,6 +685,13 @@
 
 - (void) revmobUserClosedTheAd {
     NSLog(@"revmobUserClosedTheAd");
+    
+    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onRewardedVideoAdHidden"];
+    [pr setKeepCallbackAsBool:YES];
+    [[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
+    //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    //[pr setKeepCallbackAsBool:YES];
+    //[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]]; 
 }
 
 - (void) installDidReceive {
@@ -746,16 +712,16 @@
 }
 
 -(void)revmobVideoDidStart{
-    NSLog(@"[RevMob Sample App] Video started.");
+    NSLog(@"revmobVideoDidStart");
 }
 
 -(void)revmobVideoDidFinish{
-    NSLog(@"[RevMob Sample App] Video started.");
+    NSLog(@"revmobVideoDidFinish");
 }
 
 //rewarded video ad callback
 -(void)revmobRewardedVideoDidLoad{
-    NSLog(@"[RevMob Sample App] Rewarded Video loaded.");
+    NSLog(@"revmobRewardedVideoDidLoad");
 	
     if(revMobPluginOverlap.rewardedVideoAdPreload) {
         CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onRewardedVideoAdPreloaded"];
@@ -779,15 +745,15 @@
 }
 
 -(void)revmobRewardedVideoNotCompletelyLoaded{
-    NSLog(@"[RevMob Sample App] Rewarded Video not completely loaded.");
+    NSLog(@"revmobRewardedVideoNotCompletelyLoaded");
 }
 
 -(void)revmobRewardedPreRollDisplayed{
-    NSLog(@"[RevMob Sample App] Rewarded Pre Roll displayed.");
+    NSLog(@"revmobRewardedPreRollDisplayed");
 }
 
 -(void)revmobRewardedVideoDidStart{
-    NSLog(@"[RevMob Sample App] Rewarded Video started.");
+    NSLog(@"revmobRewardedVideoDidStart");
 	
     CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onRewardedVideoAdShown"];
     [pr setKeepCallbackAsBool:YES];
@@ -798,19 +764,11 @@
 }
 
 -(void)revmobRewardedVideoDidFinish{
-    NSLog(@"[RevMob Sample App] Rewarded Video finished.");
-	
-    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onRewardedVideoAdHidden"];
-    [pr setKeepCallbackAsBool:YES];
-    [[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
-    //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    //[pr setKeepCallbackAsBool:YES];
-    //[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
-	
+    NSLog(@"revmobRewardedVideoDidFinish");
 }
 
 -(void)revmobRewardedVideoComplete {
-    NSLog(@"[RevMob Sample App] Rewarded Video completed.");
+    NSLog(@"revmobRewardedVideoComplete");
     
     CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onRewardedVideoAdCompleted"];
     [pr setKeepCallbackAsBool:YES];
@@ -872,13 +830,14 @@
 
 - (void) revmobAdDisplayed {
     NSLog(@"revmobAdDisplayed");
-
+  
+    //android: triggered, ios: not triggered
     CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onPopupAdShown"];
-	[pr setKeepCallbackAsBool:YES];
-	[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
+    [pr setKeepCallbackAsBool:YES];
+    [[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
     //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-	//[pr setKeepCallbackAsBool:YES];
-	//[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
+    //[pr setKeepCallbackAsBool:YES];
+    //[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
 }
 
 - (void) revmobUserClickedInTheAd {
@@ -888,15 +847,13 @@
 - (void) revmobUserClosedTheAd {
     NSLog(@"revmobUserClosedTheAd");
 	
-/*			
-	//not triggerred	
+	//android: not triggered, ios: triggered
     CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onPopupAdHidden"];
 	[pr setKeepCallbackAsBool:YES];
 	[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
     //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
 	//[pr setKeepCallbackAsBool:YES];
 	//[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
-*/	
 }
 
 - (void) installDidReceive {
@@ -959,22 +916,23 @@
 
 - (void) revmobAdDisplayed {
     NSLog(@"revmobAdDisplayed");
-	
-    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onLinkAdShown"];
-	[pr setKeepCallbackAsBool:YES];
-	[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
-    //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-	//[pr setKeepCallbackAsBool:YES];
-	//[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
 }
 
 - (void) revmobUserClickedInTheAd {
     NSLog(@"revmobUserClickedInTheAd");
+
+    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onLinkAdShown"];
+    [pr setKeepCallbackAsBool:YES];
+    [[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
+    //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    //[pr setKeepCallbackAsBool:YES];
+    //[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
 }
 
 - (void) revmobUserClosedTheAd {
     NSLog(@"revmobUserClosedTheAd");
-	
+
+    //android: not triggered, ios: not triggered
     CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onLinkAdHidden"];
 	[pr setKeepCallbackAsBool:YES];
 	[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];

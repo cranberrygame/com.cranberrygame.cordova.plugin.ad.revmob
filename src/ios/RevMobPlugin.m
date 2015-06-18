@@ -27,10 +27,10 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
     NSString *licenseKey = [command.arguments objectAtIndex: 1];
     NSLog(@"%@", email);
     NSLog(@"%@", licenseKey);
-    
-    //[self.commandDelegate runInBackground:^{
+
+    [self.commandDelegate runInBackground:^{
         [self _setLicenseKey:email aLicenseKey:licenseKey];
-    //}];
+    }];
 }
 
 - (void) setUp: (CDVInvokedUrlCommand*)command {
@@ -56,10 +56,10 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
         pluginDelegate = [[RevMobPluginOverlap alloc] initWithPlugin:self];
     //else
     //    pluginDelegate = [[RevMobPluginSplit alloc] initWithPlugin:self];
-			
-    //[self.commandDelegate runInBackground:^{
-		[self _setUp:mediaId anIsOverlap:isOverlap];	
-    //}];
+    
+    [self.commandDelegate runInBackground:^{
+        [self _setUp:mediaId anIsOverlap:isOverlap];
+    }];
 }
 
 - (void) preloadBannerAd: (CDVInvokedUrlCommand*)command {
@@ -80,33 +80,33 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
 }
 
 - (void) reloadBannerAd: (CDVInvokedUrlCommand*)command {
-    [self.commandDelegate runInBackground:^{
+    //[self.commandDelegate runInBackground:^{
 		[self _reloadBannerAd];
-    }];
+    //}];
 }
 
 - (void) hideBannerAd: (CDVInvokedUrlCommand*)command {
-    [self.commandDelegate runInBackground:^{
+    //[self.commandDelegate runInBackground:^{
 		[self _hideBannerAd];
-    }];		
+    //}];
 }
 
 - (void) preloadFullScreenAd: (CDVInvokedUrlCommand*)command {
-//    [self.commandDelegate runInBackground:^{
+    [self.commandDelegate runInBackground:^{
 		[self _preloadFullScreenAd];
-//    }];
+    }];
 }
 
 - (void) showFullScreenAd: (CDVInvokedUrlCommand*)command {
-//    [self.commandDelegate runInBackground:^{
+    //[self.commandDelegate runInBackground:^{
 		[self _showFullScreenAd];
-//    }];
+    //}];
 }
 
 - (void) preloadVideoAd: (CDVInvokedUrlCommand*)command {
-    [self.commandDelegate runInBackground:^{
+    //[self.commandDelegate runInBackground:^{
         [self _preloadVideoAd];
-    }];
+    //}];
 }
 
 - (void) showVideoAd: (CDVInvokedUrlCommand*)command {
