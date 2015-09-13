@@ -2,10 +2,10 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-ad-revmob"
-    version="1.0.56">
+    version="1.0.58">
 	
     <name>Cordova RevMob plugin</name>
-    <description>Show revmob banner, full screen, video, rewarded video, popup, link ad.</description>
+    <description>Show revmob banner, interstitial, video, rewarded video, popup, link ad.</description>
     <author>Sang Ki Kwon (Cranberrygame)</author>	
     <license>MIT</license>
     <keywords>cordova,plugin,ad,revmob,monetisation</keywords>

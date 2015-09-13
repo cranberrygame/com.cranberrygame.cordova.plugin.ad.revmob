@@ -221,7 +221,8 @@
 - (void) _removeBannerViewOverlap {
     if (bannerView == nil)
 		return;
-		
+
+	//[self.bannerView removeFromSuperview];		
 	//if banner is showing
 	UIView* webView = [bannerView superview];
 	if (webView != nil) {
