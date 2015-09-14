@@ -35,8 +35,9 @@ cordova plugin add cordova-plugin-ad-revmob
 https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA HYBRID MOBILE APP SETTINGS - Plugins - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
 ```c
 Name: revmob
-Plugin ID: com.cranberrygame.cordova.plugin.ad.revmob
-[v] Plugin is located in the Apache Cordova Plugins Registry
+Plugin ID: cordova-plugin-ad-revmob
+[Do not check] Plugin is located in the Apache Cordova Plugins Registry
+Repo URL: https://github.com/cranberrygame/cordova-plugin-ad-revmob
 ```
 
 ## Cocoon ##
