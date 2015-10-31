@@ -44,8 +44,8 @@ interface PluginDelegate {
 	public void _showBannerAd(String position, String size);
 	public void _reloadBannerAd();
 	public void _hideBannerAd();
-	public void _preloadFullScreenAd();
-	public void _showFullScreenAd();
+	public void _preloadInterstitialAd();
+	public void _showInterstitialAd();
 	public void _preloadPopupAd();
 	public void _showPopupAd();
 	public void _preloadLinkAd();
@@ -145,13 +145,13 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 			
 			return true;
 		}
-		else if (action.equals("preloadFullScreenAd")) {
-			preloadFullScreenAd(action, args, callbackContext);
+		else if (action.equals("preloadInterstitialAd")) {
+			preloadInterstitialAd(action, args, callbackContext);
 			
 			return true;
 		}
-		else if (action.equals("showFullScreenAd")) {
-			showFullScreenAd(action, args, callbackContext);
+		else if (action.equals("showInterstitialAd")) {
+			showInterstitialAd(action, args, callbackContext);
 						
 			return true;
 		}
@@ -300,20 +300,20 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 		});
 	}
 
-	private void preloadFullScreenAd(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+	private void preloadInterstitialAd(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		cordova.getActivity().runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				_preloadFullScreenAd();
+				_preloadInterstitialAd();
 			}
 		});
 	}
 
-	private void showFullScreenAd(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+	private void showInterstitialAd(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		cordova.getActivity().runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				_showFullScreenAd();
+				_showInterstitialAd();
 			}
 		});
 	}
@@ -467,12 +467,12 @@ public class RevMobPlugin extends CordovaPlugin implements PluginDelegate, Plugi
 		pluginDelegate._hideBannerAd();
 	}
 		
-	public void _preloadFullScreenAd() {
-		pluginDelegate._preloadFullScreenAd();
+	public void _preloadInterstitialAd() {
+		pluginDelegate._preloadInterstitialAd();
 	}
 	
-	public void _showFullScreenAd() {
-		pluginDelegate._showFullScreenAd();
+	public void _showInterstitialAd() {
+		pluginDelegate._showInterstitialAd();
 	}
 
 	public void _preloadVideoAd() {

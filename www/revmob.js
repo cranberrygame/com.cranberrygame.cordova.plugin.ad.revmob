@@ -1,13 +1,13 @@
 
 module.exports = {
 	_loadedBannerAd: false,
-	_loadedFullScreenAd: false,
+	_loadedInterstitialAd: false,	
 	_loadedVideoAd: false,
 	_loadedRewardedVideoAd: false,
 	_loadedPopupAd: false,
 	_loadedLinkAd: false,
 	_isShowingBannerAd: false,
-	_isShowingFullScreenAd: false,
+	_isShowingInterstitialAd: false,	
 	_isShowingVideoAd: false,
 	_isShowingRewardedVideoAd: false,
 	_isShowingPopupAd: false,
@@ -52,28 +52,44 @@ module.exports = {
 							self.onBannerAdHidden();
 					}
 					//
-					else if (result == "onFullScreenAdPreloaded") {
+					else if (result == "onInterstitialAdPreloaded") {
+//cranberrygame start; deprecated					
 						if (self.onFullScreenAdPreloaded)
 							self.onFullScreenAdPreloaded();
+//cranberrygame end							
+						if (self.onInterstitialAdPreloaded)
+							self.onInterstitialAdPreloaded();							
 					}
-					else if (result == "onFullScreenAdLoaded") {
-						self._loadedFullScreenAd = true;
+					else if (result == "onInterstitialAdLoaded") {
+						self._loadedInterstitialAd = true;
 
+//cranberrygame start; deprecated						
 						if (self.onFullScreenAdLoaded)
 							self.onFullScreenAdLoaded();
+//cranberrygame end							
+						if (self.onInterstitialAdLoaded)
+							self.onInterstitialAdLoaded();								
 					}
-					else if (result == "onFullScreenAdShown") {
-						self._loadedFullScreenAd = false;
-						self._isShowingFullScreenAd = true;
+					else if (result == "onInterstitialAdShown") {
+						self._loadedInterstitialAd = false;					
+						self._isShowingInterstitialAd = true;
 					
+//cranberrygame start; deprecated					
 						if (self.onFullScreenAdShown)
 							self.onFullScreenAdShown();
+//cranberrygame end						
+						if (self.onInterstitialAdShown)
+							self.onInterstitialAdShown();						
 					}
-					else if (result == "onFullScreenAdHidden") {
-						self._isShowingFullScreenAd = false;
+					else if (result == "onInterstitialAdHidden") {
+						self._isShowingInterstitialAd = false;
 					
+//cranberrygame start; deprecated					
 						 if (self.onFullScreenAdHidden)
 							self.onFullScreenAdHidden();
+//cranberrygame end							
+						 if (self.onInterstitialAdHidden)
+							self.onInterstitialAdHidden();							
 					}
 					//
 					else if (result == "onVideoAdPreloaded") {
@@ -234,13 +250,14 @@ module.exports = {
         ); 
     },
 	//
+//cranberrygame start; deprecated		
 	preloadFullScreenAd: function() {
 		var self = this;	
         cordova.exec(
             null,
             null,
             'RevMobPlugin',
-            'preloadFullScreenAd',
+            'preloadInterstitialAd',
             []
         ); 
     },
@@ -250,7 +267,28 @@ module.exports = {
             null,
             null,
             'RevMobPlugin',
-            'showFullScreenAd',
+            'showInterstitialAd',
+            []
+        ); 
+    },
+//cranberrygame end		
+	preloadInterstitialAd: function() {
+		var self = this;	
+        cordova.exec(
+            null,
+            null,
+            'RevMobPlugin',
+            'preloadInterstitialAd',
+            []
+        ); 
+    },
+    showInterstitialAd: function() {
+		var self = this;
+		cordova.exec(
+            null,
+            null,
+            'RevMobPlugin',
+            'showInterstitialAd',
             []
         ); 
     },
@@ -342,9 +380,14 @@ module.exports = {
 	loadedBannerAd: function() {
 		return this._loadedBannerAd;
 	},
+//cranberrygame start; deprecated	
 	loadedFullScreenAd: function() {
-		return this._loadedFullScreenAd;
-	},		
+		return this._loadedInterstitialAd;
+	},
+//cranberrygame end	
+	loadedInterstitialAd: function() {
+		return this._loadedInterstitialAd;
+	},	
 	loadedVideoAd: function() {
 		return this._loadedVideoAd;
 	},		
@@ -361,9 +404,14 @@ module.exports = {
 	isShowingBannerAd: function() {
 		return this._isShowingBannerAd;
 	},
+//cranberrygame start; deprecated	
 	isShowingFullScreenAd: function() {
-		return this._isShowingFullScreenAd;
+		return this._isShowingInterstitialAd;
 	},
+//cranberrygame end	
+	isShowingInterstitialAd: function() {
+		return this._isShowingInterstitialAd;
+	},	
 	isShowingVideoAd: function() {
 		return this._isShowingVideoAd;
 	},		
@@ -382,10 +430,16 @@ module.exports = {
 	onBannerAdShown: null,
 	onBannerAdHidden: null,
 	//
+//cranberrygame start; deprecated	
 	onFullScreenAdPreloaded: null,
 	onFullScreenAdLoaded: null,
 	onFullScreenAdShown: null,
 	onFullScreenAdHidden: null,
+//cranberrygame end
+	onInterstitialAdPreloaded: null,
+	onInterstitialAdLoaded: null,
+	onInterstitialAdShown: null,
+	onInterstitialAdHidden: null	
 	//
 	onVideoAdPreloaded: null,
 	onVideoAdLoaded: null,

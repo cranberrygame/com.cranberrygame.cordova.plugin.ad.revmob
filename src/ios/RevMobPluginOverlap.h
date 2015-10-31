@@ -19,7 +19,7 @@
 @property NSInteger lastOrientation;
 //
 @property BOOL bannerAdPreload;	
-@property BOOL fullScreenAdPreload;
+@property BOOL interstitialAdPreload;
 @property BOOL videoAdPreload;
 @property BOOL rewardedVideoAdPreload;
 @property BOOL popupAdPreload;	
@@ -33,7 +33,7 @@
 @property RevMobAdLink *link;
 //
 @property id bannerAdRevMobAdsDelegate;
-@property id fullScreenAdRevMobAdsDelegate;
+@property id interstitialAdRevMobAdsDelegate;
 @property id videoAdRevMobAdsDelegate;
 @property id rewardedVideoAdRevMobAdsDelegate;
 @property id popupAdRevMobAdsDelegate;
@@ -48,7 +48,7 @@
 - (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
 @end
 
-@interface FullScreenAdRevMobAdsDelegate : NSObject <RevMobAdsDelegate>
+@interface InterstitialAdRevMobAdsDelegate : NSObject <RevMobAdsDelegate>
 @property RevMobPluginOverlap *revMobPluginOverlap;
 - (id) initWithRevMobPluginOverlap:(RevMobPluginOverlap*)revMobPluginOverlap_;
 @end

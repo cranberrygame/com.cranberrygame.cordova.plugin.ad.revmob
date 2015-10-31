@@ -39,17 +39,17 @@ document.addEventListener("deviceready", function(){
 		alert('onBannerAdHidden');
 	};	
 	//
-	window.revmob.onFullScreenAdPreloaded = function() {
-		alert('onFullScreenAdPreloaded');
+	window.revmob.onInterstitialAdPreloaded = function() {
+		alert('onInterstitialAdPreloaded');
 	};
-	window.revmob.onFullScreenAdLoaded = function() {
-		alert('onFullScreenAdLoaded');
+	window.revmob.onInterstitialAdLoaded = function() {
+		alert('onInterstitialAdLoaded');
 	};
-	window.revmob.onFullScreenAdShown = function() {
-		alert('onFullScreenAdShown');
+	window.revmob.onInterstitialAdShown = function() {
+		alert('onInterstitialAdShown');
 	};
-	window.revmob.onFullScreenAdHidden = function() {
-		alert('onFullScreenAdHidden');
+	window.revmob.onInterstitialAdHidden = function() {
+		alert('onInterstitialAdHidden');
 	};
 	//
 	window.revmob.onVideoAdPreloaded = function() {
@@ -120,8 +120,8 @@ position: 'bottom-center' //only 'bottom-center' is supported
 <p><button onclick="window.revmob.reloadBannerAd();">reloadBannerAd</button></p>
 <p><button onclick="window.revmob.hideBannerAd();">hideBannerAd</button></p>
 <br>
-<p><button onclick="window.revmob.preloadFullScreenAd();">preloadFullScreenAd</button></p>
-<p><button onclick="window.revmob.showFullScreenAd();">showFullScreenAd</button></p>
+<p><button onclick="window.revmob.preloadInterstitialAd();">preloadInterstitialAd</button></p>
+<p><button onclick="window.revmob.showInterstitialAd();">showInterstitialAd</button></p>
 <br>
 <p><button onclick="window.revmob.preloadVideoAd();">preloadVideoAd</button></p>
 <p><button onclick="window.revmob.showVideoAd();">showVideoAd</button></p>
@@ -136,14 +136,14 @@ position: 'bottom-center' //only 'bottom-center' is supported
 <p><button onclick="window.revmob.showLinkAd();">showLinkAd</button></p>
 <br>
 <p><button onclick="alert(window.revmob.loadedBannerAd());">loadedBannerAd</button></p>
-<p><button onclick="alert(window.revmob.loadedFullScreenAd());">loadedFullScreenAd</button></p>
+<p><button onclick="alert(window.revmob.loadedInterstitialAd());">loadedInterstitialAd</button></p>
 <p><button onclick="alert(window.revmob.loadedVideoAd());">loadedVideoAd</button></p>
 <p><button onclick="alert(window.revmob.loadedRewardedVideoAd());">loadedRewardedVideoAd</button></p>
 <p><button onclick="alert(window.revmob.loadedPopupAd());">loadedPopupAd</button></p>
 <p><button onclick="alert(window.revmob.loadedLinkAd());">loadedLinkAd</button></p>
 <br>
 <p><button onclick="alert(window.revmob.isShowingBannerAd());">isShowingBannerAd</button></p>
-<p><button onclick="alert(window.revmob.isShowingFullScreenAd());">isShowingFullScreenAd</button></p>
+<p><button onclick="alert(window.revmob.isShowingInterstitialAd());">isShowingInterstitialAd</button></p>
 <p><button onclick="alert(window.revmob.isShowingVideoAd());">isShowingVideoAd</button></p>
 <p><button onclick="alert(window.revmob.isShowingRewardedVideoAd());">isShowingRewardedVideoAd</button></p>
 <p><button onclick="alert(window.revmob.isShowingPopupAd());">isShowingPopupAd</button></p>

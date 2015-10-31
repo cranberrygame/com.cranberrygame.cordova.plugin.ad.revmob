@@ -17,7 +17,7 @@
 @synthesize lastOrientation;
 //
 @synthesize bannerAdPreload;	
-@synthesize fullScreenAdPreload;
+@synthesize interstitialAdPreload;
 @synthesize popupAdPreload;
 @synthesize linkAdPreload;
 @synthesize rewardedVideoAdPreload;
@@ -31,7 +31,7 @@
 @synthesize rewardedVideo;
 //
 @synthesize bannerAdRevMobAdsDelegate;
-@synthesize fullScreenAdRevMobAdsDelegate;
+@synthesize interstitialAdRevMobAdsDelegate;
 @synthesize videoAdRevMobAdsDelegate;
 @synthesize rewardedVideoAdRevMobAdsDelegate;
 @synthesize popupAdRevMobAdsDelegate;
@@ -232,29 +232,29 @@
 	}
 }	
 	
-- (void) _preloadFullScreenAd {
-	fullScreenAdPreload = YES;
+- (void) _preloadInterstitialAd {
+	interstitialAdPreload = YES;
 
-	[self loadFullScreenAd];	
+	[self loadInterstitialAd];	
 }
 
-- (void) loadFullScreenAd {
+- (void) loadInterstitialAd {
     self.interstitialView = [[RevMobAds session] fullscreen];
-    //self.interstitialView.delegate = [[FullScreenAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];//runtime error
-    self.fullScreenAdRevMobAdsDelegate = [[FullScreenAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
-    self.interstitialView.delegate = self.fullScreenAdRevMobAdsDelegate;
+    //self.interstitialView.delegate = [[InterstitialAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];//runtime error
+    self.interstitialAdRevMobAdsDelegate = [[InterstitialAdRevMobAdsDelegate alloc] initWithRevMobPluginOverlap:self];
+    self.interstitialView.delegate = self.interstitialAdRevMobAdsDelegate;
     
 	[self.interstitialView loadAd];
 }
 
-- (void) _showFullScreenAd {
-	if(fullScreenAdPreload) {
-		fullScreenAdPreload = NO;
+- (void) _showInterstitialAd {
+	if(interstitialAdPreload) {
+		interstitialAdPreload = NO;
 
 		[self.interstitialView showAd];
 	}
 	else {
-		[self loadFullScreenAd];
+		[self loadInterstitialAd];
 	}
 }
 
@@ -438,7 +438,7 @@
 
 @end
 
-@implementation FullScreenAdRevMobAdsDelegate
+@implementation InterstitialAdRevMobAdsDelegate
 
 @synthesize revMobPluginOverlap;
 
@@ -461,8 +461,8 @@
 - (void) revmobAdDidReceive {
     NSLog(@"revmobAdDidReceive");
 	
-	if(revMobPluginOverlap.fullScreenAdPreload) {
-		CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onFullScreenAdPreloaded"];
+	if(revMobPluginOverlap.interstitialAdPreload) {
+		CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onInterstitialAdPreloaded"];
 		[pr setKeepCallbackAsBool:YES];
 		[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
 		//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
@@ -470,14 +470,14 @@
 		//[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
 	}
 	
-	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onFullScreenAdLoaded"];
+	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onInterstitialAdLoaded"];
 	[pr setKeepCallbackAsBool:YES];
 	[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
 	//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
 	//[pr setKeepCallbackAsBool:YES];
 	//[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
 	
-    if(!revMobPluginOverlap.fullScreenAdPreload) {
+    if(!revMobPluginOverlap.interstitialAdPreload) {
         [revMobPluginOverlap.interstitialView showAd];
     }
 }
@@ -489,7 +489,7 @@
 - (void) revmobAdDisplayed {
     NSLog(@"revmobAdDisplayed");
 	
-    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onFullScreenAdShown"];
+    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onInterstitialAdShown"];
 	[pr setKeepCallbackAsBool:YES];
 	[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
     //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
@@ -504,7 +504,7 @@
 - (void) revmobUserClosedTheAd {
     NSLog(@"revmobUserClosedTheAd");
 	
-    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onFullScreenAdHidden"];
+    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onInterstitialAdHidden"];
 	[pr setKeepCallbackAsBool:YES];
 	[[revMobPluginOverlap.plugin getCommandDelegate] sendPluginResult:pr callbackId:[revMobPluginOverlap.plugin getCallbackIdKeepCallback]];
     //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];

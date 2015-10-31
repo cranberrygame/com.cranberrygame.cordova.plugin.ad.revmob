@@ -1,7 +1,7 @@
 Cordova RevMob plugin
 ====================
 # Overview #
-Show revmob popup, link, banner, full screen (including accepts video option) ad
+Show revmob banner, interstitial, video, rewarded video, popup, link ad.
 
 [android, ios] [cordova cli] [xdk] [cocoon] [phonegap build service]
 
@@ -32,12 +32,10 @@ cordova plugin add cordova-plugin-ad-revmob
 ```
 
 ## Xdk ##
-https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA HYBRID MOBILE APP SETTINGS - Plugins - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
+https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA HYBRID MOBILE APP SETTINGS - Plugin Management - Add Plugins to this Project - Third Party Plugins -
 ```c
-Name: revmob
+Plugin Source: Cordova plugin registry
 Plugin ID: cordova-plugin-ad-revmob
-[Do not check] Plugin is located in the Apache Cordova Plugins Registry
-Repo URL: https://github.com/cranberrygame/cordova-plugin-ad-revmob
 ```
 
 ## Cocoon ##
@@ -106,17 +104,17 @@ document.addEventListener("deviceready", function(){
 		alert('onBannerAdHidden');
 	};	
 	//
-	window.revmob.onFullScreenAdPreloaded = function() {
-		alert('onFullScreenAdPreloaded');
+	window.revmob.onInterstitialAdPreloaded = function() {
+		alert('onInterstitialAdPreloaded');
 	};
-	window.revmob.onFullScreenAdLoaded = function() {
-		alert('onFullScreenAdLoaded');
+	window.revmob.onInterstitialAdLoaded = function() {
+		alert('onInterstitialAdLoaded');
 	};
-	window.revmob.onFullScreenAdShown = function() {
-		alert('onFullScreenAdShown');
+	window.revmob.onInterstitialAdShown = function() {
+		alert('onInterstitialAdShown');
 	};
-	window.revmob.onFullScreenAdHidden = function() {
-		alert('onFullScreenAdHidden');
+	window.revmob.onInterstitialAdHidden = function() {
+		alert('onInterstitialAdHidden');
 	};
 	//
 	window.revmob.onVideoAdPreloaded = function() {
@@ -185,8 +183,8 @@ window.revmob.showBannerAd('bottom-center');
 window.revmob.reloadBannerAd();
 window.revmob.hideBannerAd();
 
-window.revmob.preloadFullScreenAd();//option, download ad previously for fast show
-window.revmob.showFullScreenAd();
+window.revmob.preloadInterstitialAd();//option, download ad previously for fast show
+window.revmob.showInterstitialAd();
 
 window.revmob.preloadVideoAd();//option, download ad previously for fast show
 window.revmob.showVideoAd();
@@ -201,14 +199,14 @@ window.revmob.preloadLinkAd();//option, download ad previously for fast show
 window.revmob.showLinkAd();
 
 alert(window.revmob.loadedBannerAd());//boolean: true or false
-alert(window.revmob.loadedFullScreenAd());//boolean: true or false
+alert(window.revmob.loadedInterstitialAd());//boolean: true or false
 alert(window.revmob.loadedVideoAd());//boolean: true or false
 alert(window.revmob.loadedRewardedVideoAd());//boolean: true or false
 alert(window.revmob.loadedPopupAd());//boolean: true or false
 alert(window.revmob.loadedLinkAd());//boolean: true or false
 
 alert(window.revmob.isShowingBannerAd());//boolean: true or false
-alert(window.revmob.isShowingFullScreenAd());//boolean: true or false
+alert(window.revmob.isShowingInterstitialAd());//boolean: true or false
 alert(window.revmob.isShowingVideoAd());//boolean: true or false
 alert(window.revmob.isShowingRewardedVideoAd());//boolean: true or false
 alert(window.revmob.isShowingPopupAd());//boolean: true or false
@@ -227,7 +225,7 @@ https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/revmob/apk.html
 
 # Useful links #
 
-Plugins For Cordova<br>
+Cordova Plugins<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #

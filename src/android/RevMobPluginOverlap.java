@@ -109,7 +109,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 	protected int lastOrientation;
 	//
 	protected boolean bannerAdPreload;	
-	protected boolean fullScreenAdPreload;
+	protected boolean interstitialAdPreload;
 	protected boolean videoAdPreload;	
 	protected boolean rewardedVideoAdPreload;	
 	protected boolean popupAdPreload;
@@ -387,24 +387,24 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		}
 	}
 	
-	public void _preloadFullScreenAd() {
-		fullScreenAdPreload = true;
+	public void _preloadInterstitialAd() {
+		interstitialAdPreload = true;
 
-		loadFullScreenAd();		
+		loadInterstitialAd();		
 	}
 	
-	private void loadFullScreenAd() {
-		interstitialView = revmob.createFullscreen(plugin.getCordova().getActivity(), new FullScreenAdRevMobAdsListener());
+	private void loadInterstitialAd() {
+		interstitialView = revmob.createFullscreen(plugin.getCordova().getActivity(), new InterstitialAdRevMobAdsListener());
 	}
 	
-	public void _showFullScreenAd() {
-		if(fullScreenAdPreload) {
-			fullScreenAdPreload = false;
+	public void _showInterstitialAd() {
+		if(interstitialAdPreload) {
+			interstitialAdPreload = false;
 
 			interstitialView.show();
 		}
 		else {
-			loadFullScreenAd();
+			loadInterstitialAd();
 		}		
 	}
     
@@ -588,7 +588,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		}
 	};
 		
-	class FullScreenAdRevMobAdsListener extends RevMobAdsListener {
+	class InterstitialAdRevMobAdsListener extends RevMobAdsListener {
 		
 		@Override
 		public void onRevMobSessionIsStarted() {
@@ -604,8 +604,8 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		public void onRevMobAdReceived() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdReceived"));
 	
-    		if(fullScreenAdPreload) {
-    			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdPreloaded");
+    		if(interstitialAdPreload) {
+    			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onInterstitialAdPreloaded");
     			pr.setKeepCallback(true);
     			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
@@ -613,14 +613,14 @@ public class RevMobPluginOverlap implements PluginDelegate {
     			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     		}
     		
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdLoaded");
+    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onInterstitialAdLoaded");
     		pr.setKeepCallback(true);
     		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
     		//pr.setKeepCallback(true);
     		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);		
     		
-    		if(!fullScreenAdPreload) {
+    		if(!interstitialAdPreload) {
     			interstitialView.show();
     		}    		
 		}
@@ -634,7 +634,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		public void onRevMobAdDisplayed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDisplayed"));
 			
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdShown");
+    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onInterstitialAdShown");
     		pr.setKeepCallback(true);
     		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
@@ -651,7 +651,7 @@ public class RevMobPluginOverlap implements PluginDelegate {
 		public void onRevMobAdDismissed() {
 			Log.d(LOG_TAG, String.format("%s", "onRevMobAdDismissed"));
 			
-    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdHidden");
+    		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onInterstitialAdHidden");
     		pr.setKeepCallback(true);
     		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
     		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);

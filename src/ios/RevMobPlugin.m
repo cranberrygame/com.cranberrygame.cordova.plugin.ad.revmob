@@ -91,15 +91,15 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
     //}];
 }
 
-- (void) preloadFullScreenAd: (CDVInvokedUrlCommand*)command {
+- (void) preloadInterstitialAd: (CDVInvokedUrlCommand*)command {
     [self.commandDelegate runInBackground:^{
-		[self _preloadFullScreenAd];
+		[self _preloadInterstitialAd];
     }];
 }
 
-- (void) showFullScreenAd: (CDVInvokedUrlCommand*)command {
+- (void) showInterstitialAd: (CDVInvokedUrlCommand*)command {
     //[self.commandDelegate runInBackground:^{
-		[self _showFullScreenAd];
+		[self _showInterstitialAd];
     //}];
 }
 
@@ -245,12 +245,12 @@ static NSString *TEST_MEDIA_ID = @"553f088dd80c9c7c614a3ef4";
     [pluginDelegate _hideBannerAd];
 }
 
-- (void) _preloadFullScreenAd {
-	[pluginDelegate _preloadFullScreenAd];
+- (void) _preloadInterstitialAd {
+	[pluginDelegate _preloadInterstitialAd];
 }
 
-- (void) _showFullScreenAd {
-	[pluginDelegate _showFullScreenAd];	
+- (void) _showInterstitialAd {
+	[pluginDelegate _showInterstitialAd];	
 }
 
 - (void) _preloadVideoAd {
