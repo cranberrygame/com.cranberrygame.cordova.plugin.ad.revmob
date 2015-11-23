@@ -16,8 +16,11 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 
 # Change log #
 ```c
-Updated sdk version to 9.0.1
-
+1.0.63
+	Updated sdk version to 9.0.1
+1.0.64
+	Fixed black screen issue
+	
 To-Do:
 
 	supports ios banner

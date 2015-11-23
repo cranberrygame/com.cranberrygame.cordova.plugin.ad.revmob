@@ -439,7 +439,7 @@ module.exports = {
 	onInterstitialAdPreloaded: null,
 	onInterstitialAdLoaded: null,
 	onInterstitialAdShown: null,
-	onInterstitialAdHidden: null	
+	onInterstitialAdHidden: null,	
 	//
 	onVideoAdPreloaded: null,
 	onVideoAdLoaded: null,
