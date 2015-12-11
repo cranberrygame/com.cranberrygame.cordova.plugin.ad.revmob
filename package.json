@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-ad-revmob",
-  "version": "1.0.64",
+  "version": "1.0.65",
   "description": "Show revmob banner, interstitial, video, rewarded video, popup, link ad.",
   "cordova": {
     "id": "cordova-plugin-ad-revmob",
