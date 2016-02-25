@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-ad-revmob"
-    version="1.0.65">
+    version="1.0.66">
 	
     <name>Cordova RevMob plugin</name>
     <description>Show revmob banner, interstitial, video, rewarded video, popup, link ad.</description>
@@ -15,7 +15,7 @@
 	    <engine name="cordova" version=">=3.0.0" />
 	</engines>
  	
-    <js-module src="www/revmob.js">
+    <js-module src="www/revmob.js" name="revmob">
         <clobbers target="window.revmob" />
     </js-module>
 	
